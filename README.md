@@ -1,2 +1,3 @@
-# marionette-redux
-Marionette bindings for Redux http://redux.js.org
+# Marionette Redux
+Marionette bindings for [Redux](http://redux.js.org)
+Performant and flexible.
