@@ -2,7 +2,7 @@
   "name": "marionette-redux",
   "description": "Marionette bindings for Redux",
   "version": "1.0.0",
-  "homepage": "https://github.com/andrewhenderson/marionette-redux",
+  "homepage": "https://github.com/AndrewHenderson/marionette-redux",
   "main": "dist/marionette-redux.js",
   "keywords": [
     "marionette",
@@ -12,11 +12,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/andrewhenderson/marionette-redux.git"
+    "url": "https://github.com/AndrewHenderson/marionette-redux.git"
   },
-  "github": "https://github.com/andrewhenderson/marionette-redux",
+  "github": "https://github.com/AndrewHenderson/marionette-redux",
+  "authors": [
+    "Andrew Henderson <andrew.m.henderson@gmail.com> (https://github.com/AndrewHenderson)"
+  ],
   "dependencies": {
-    "backbone.marionette": "^3.1.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
@@ -27,6 +29,7 @@
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-es2015-rollup": "^1.2.0",
     "babel-register": "^6.14.0",
+    "backbone.marionette": "^3.1.0",
     "chai": "^3.5.0",
     "eslint": "^3.6.0",
     "gulp": "^3.9.1",
