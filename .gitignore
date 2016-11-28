@@ -1,0 +1,9 @@
+# Package Managers
+node_modules
+npm-debug.log
+
+# OS
+.DS_Store
+
+# IDE
+/.idea

@@ -1,0 +1,57 @@
+{
+  "name": "marionette-redux",
+  "description": "Marionette bindings for Redux",
+  "version": "1.0.0",
+  "homepage": "https://github.com/andrewhenderson/marionette-redux",
+  "main": "dist/marionette-redux.js",
+  "keywords": [
+    "marionette",
+    "redux",
+    "plugin"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewhenderson/marionette-redux.git"
+  },
+  "github": "https://github.com/andrewhenderson/marionette-redux",
+  "dependencies": {
+    "backbone.marionette": "^3.1.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-es2015-rollup": "^1.2.0",
+    "babel-register": "^6.14.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.6.0",
+    "gulp": "^3.9.1",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-eslint": "^3.0.1",
+    "gulp-file": "^0.3.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-lintspaces": "^0.4.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "isparta": "^4.0.0",
+    "jquery": "^3.1.1",
+    "jsdom": "^9.8.3",
+    "mocha": "^3.0.2",
+    "rollup": "^0.36.0",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-json": "^2.0.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "run-sequence": "^1.2.2",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
+  }
+}
