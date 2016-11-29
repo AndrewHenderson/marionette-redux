@@ -59,6 +59,7 @@ var Model = Backbone.Model.extend({
 var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 
 // Marionette Behavior
+// ===================
 var MyBehavior = Marionette.Behavior.extend({
   store: store,
   events: {
