@@ -19,6 +19,9 @@ export default {
       _.extend(this.props, options.props)
     }
     this.store = options.store || this.store;
+    if (!this.store && window && window.store) {
+      this.store = window.store
+    }
     const storeState = this.store.getState();
     this.state = _.defaults({
       storeState: storeState

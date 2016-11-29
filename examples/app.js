@@ -30,6 +30,7 @@ var reducers = Redux.combineReducers({
 // ===================
 var compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : Redux.compose;
 var store = compose()(Redux.createStore)(reducers);
+window.store = store;
 
 // Shared Mapping
 // ===================
@@ -65,7 +66,6 @@ var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 // Marionette Behavior
 // ===================
 var MyBehavior = Marionette.Behavior.extend({
-  store: store,
   events: {
     'click': 'onClick'
   },
