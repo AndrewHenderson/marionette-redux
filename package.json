@@ -1,7 +1,7 @@
 {
   "name": "marionette-redux",
   "description": "Marionette bindings for Redux",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/AndrewHenderson/marionette-redux",
   "main": "dist/marionette-redux.js",
   "keywords": [
@@ -17,8 +17,8 @@
   "github": "https://github.com/AndrewHenderson/marionette-redux",
   "author": "Andrew Henderson <andrew.m.henderson@gmail.com> (https://github.com/AndrewHenderson)",
   "dependencies": {
-    "backbone.marionette": "^3.1.0",
-    "underscore": "^1.8.3"
+    "backbone.marionette": "^1.0.0",
+    "underscore": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

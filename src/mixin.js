@@ -14,6 +14,7 @@ export default {
 
     this.mapState = options.mapStateToProps || this.mapStateToProps || defaultMapStateToProps;
     this.mapDispatch = options.mapDispatchToProps || this.mapDispatchToProps || defaultMapDispatchToProps;
+    this.mergeProps = options.mergeProps || this.mergeProps || defaultMergeProps;
     this.props = this.props || {};
     if (options.props) {
       _.extend(this.props, options.props)
@@ -38,14 +39,18 @@ export default {
   getState,
 
   bindStateEvents() {
+    let bind;
     if (this.stateEvents) {
-      Marionette.bindEvents(this, this, this.stateEvents)
+      bind = Marionette.bindEvents || Marionette.bindEntityEvents;
+      bind(this, this, this.stateEvents)
     }
   },
 
   unbindStateEvents() {
+    let unbind;
     if (this.stateEvents) {
-      Marionette.unbindEvents(this, this, this.stateEvents)
+      unbind = Marionette.unbindEvents || Marionette.unbindEntityEvents;
+      unbind(this, this, this.stateEvents)
     }
   },
 
@@ -186,7 +191,7 @@ export default {
 
     if (haveStatePropsChanged) {
 
-      const mergedProps = defaultMergeProps(this.stateProps, this.dispatchProps, this.props);
+      const mergedProps = this.mergeProps(this.stateProps, this.dispatchProps, this.props);
       this.props = mergedProps;
 
       _.isFunction(this.componentDidReceiveProps) && this.componentDidReceiveProps(mergedProps)

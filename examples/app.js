@@ -161,7 +161,7 @@ var RootView = Marionette.View.extend({
 
 // Marionette Application
 // ==========================
-var App = Mn.Application.extend({
+var App = Marionette.Application.extend({
   region: '#root-element',
 
   onStart: function() {

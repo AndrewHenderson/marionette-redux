@@ -1,9 +1,10 @@
 import _ from 'underscore';
 import defaultMapStateToProps from './mapStateToProps'
 import defaultMapDispatchToProps from './mapDispatchToProps'
+import defaultMergeProps from './mergeProps'
 import mixin from './mixin'
 
-export default (_mapStateToProps, _mapDispatchToProps, _options) => {
+export default (_mapStateToProps, _mapDispatchToProps, _mergeProps, _options) => {
 
   const options = _options || {};
 
@@ -11,6 +12,7 @@ export default (_mapStateToProps, _mapDispatchToProps, _options) => {
 
     const mapStateToProps = _mapStateToProps || Component.prototype.mapStateToProps || defaultMapStateToProps;
     const mapDispatchToProps = _mapDispatchToProps || Component.prototype.mapDispatchToProps || defaultMapDispatchToProps;
+    const mergeProps = _mergeProps || Component.prototype.mergeProps || defaultMergeProps;
     const store = options.store || Component.prototype.store;
     const componentInitialize = Component.prototype.initialize;
     const componentonRender = Component.prototype.onRender;
@@ -25,6 +27,7 @@ export default (_mapStateToProps, _mapDispatchToProps, _options) => {
         mixin.initialize.call(this, {
           mapStateToProps,
           mapDispatchToProps,
+          mergeProps,
           store,
           props: initOptions.props
         });

@@ -7,3 +7,4 @@ gulp
 .gitattributes
 gulpfile.babel.js
 rollup.config.js
+docs
