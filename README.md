@@ -23,7 +23,11 @@ If you don’t yet use [npm](http://npmjs.com/) or a modern module bundler, and 
 
 ## How Does It Work?
 
-It works by providing a way to bind a Redux store to the Marionette View and/or Backbone Model/Collection lifecycles. There is an excellent video on how React Redux works [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A). If you understand that and Marionette, you should be ready to apply Marionette Redux in your applicaltion.
+By providing a way to bind a Redux store to the Marionette View and/or Backbone Model/Collection lifecycles.
+
+There is an excellent video on how React Redux works in [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A).
+
+If you understand that and Marionette, you should be ready to apply Marionette Redux in your applicaltion.
 Enjoy!
 
 ## License
