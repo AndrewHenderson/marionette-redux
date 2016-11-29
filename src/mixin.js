@@ -1,7 +1,10 @@
 import _ from 'underscore';
+import Marionette from 'marionette'
 import defaultMapStateToProps from './mapStateToProps'
 import defaultMapDispatchToProps from './mapDispatchToProps'
 import defaultMergeProps from './mergeProps'
+import setState from './setState'
+import getState from './getState'
 
 export default {
 
@@ -17,7 +20,24 @@ export default {
     this.state = _.defaults({
       storeState: storeState
     }, this.state);
+    this.bindStateEvents();
     this.clearCache()
+  },
+
+  setState,
+
+  getState,
+
+  bindStateEvents() {
+    if (this.stateEvents) {
+      Marionette.bindEvents(this, this, this.stateEvents)
+    }
+  },
+
+  unbindStateEvents() {
+    if (this.stateEvents) {
+      Marionette.unbindEvents(this, this, this.stateEvents)
+    }
   },
 
   computeStateProps(store, props) {
@@ -121,6 +141,7 @@ export default {
 
   onDestroy() {
     this.tryUnsubscribe();
+    this.unbindStateEvents();
     this.clearCache()
   },
 
@@ -162,6 +183,8 @@ export default {
       _.isFunction(this.componentDidReceiveProps) && this.componentDidReceiveProps(mergedProps)
     }
 
-    this.state.storeState = storeState
+    this.setState({
+      storeState
+    })
   }
 };

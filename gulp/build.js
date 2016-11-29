@@ -26,6 +26,7 @@ function _generate(bundle){
     banner: banner,
     globals: {
       'marionette': 'Marionette',
+      'backbone.radio': 'Radio',
       'underscore': '_'
     }
   });
@@ -34,7 +35,7 @@ function _generate(bundle){
 function bundle() {
   return rollup({
     entry: srcPath + name + '.js',
-    external: ['marionette', 'underscore'],
+    external: ['marionette', 'underscore', 'backbone.radio'],
     plugins: [
       json(),
       nodeResolve({

@@ -21,9 +21,9 @@ export default (_mapStateToProps, _mapDispatchToProps, _options) => {
       initialize(initOptions) {
 
         mixin.initialize.call(this, {
-          mapStateToProps: mapStateToProps,
-          mapDispatchToProps: mapDispatchToProps,
-          store: store
+          mapStateToProps,
+          mapDispatchToProps,
+          store
         });
 
         if (componentInitialize) {
