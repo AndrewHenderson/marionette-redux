@@ -33,9 +33,10 @@ var store = compose()(Redux.createStore)(reducers);
 
 // Shared Mapping
 // ===================
-var mapStateToProps = function(state) {
+var mapStateToProps = function(state, ownProps) {
   return {
-    bar: state.bar
+    bar: state.bar,
+    currency: ownProps.currency
   }
 };
 var mapDispatchToProps = function(dispatch) {
@@ -50,6 +51,9 @@ var mapDispatchToProps = function(dispatch) {
 // ===================
 var Model = Backbone.Model.extend({
   store: store,
+  props: {
+    currency: "EUR"
+  },
   componentDidReceiveProps: function(update) {
     this.set({
       bar: update.bar
@@ -144,9 +148,13 @@ var RootView = Marionette.View.extend({
   },
   onRender: function() {
     this.showChildView('foo', new ConnectedFooView({
-      model: new ConnectedModel()
+      model:  new ConnectedModel()
     }));
-    this.showChildView('bar', new ConnectedBarView());
+    this.showChildView('bar', new ConnectedBarView({
+      props: {
+        currency: 'USD'
+      }
+    }));
     this.showChildView('baz', new BazView());
   }
 });

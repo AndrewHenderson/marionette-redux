@@ -15,6 +15,9 @@ export default {
     this.mapState = options.mapStateToProps || this.mapStateToProps || defaultMapStateToProps;
     this.mapDispatch = options.mapDispatchToProps || this.mapDispatchToProps || defaultMapDispatchToProps;
     this.props = this.props || {};
+    if (options.props) {
+      _.extend(this.props, options.props)
+    }
     this.store = options.store || this.store;
     const storeState = this.store.getState();
     this.state = _.defaults({
