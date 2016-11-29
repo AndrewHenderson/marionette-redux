@@ -42,7 +42,7 @@ var mapStateToProps = function(state) {
 
 // Backbone Models
 // ===================
-var MydModel = Backbone.Model.extend({
+var Model = Backbone.Model.extend({
   store: store,
   componentDidReceiveProps: function(update) {
     this.set({
@@ -50,7 +50,7 @@ var MydModel = Backbone.Model.extend({
     })
   }
 });
-var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(MydModel);
+var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 var connectedModel = new ConnectedModel();
 
 // Marionette Views
