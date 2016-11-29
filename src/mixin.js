@@ -21,7 +21,8 @@ export default {
       storeState: storeState
     }, this.state);
     this.bindStateEvents();
-    this.clearCache()
+    this.clearCache();
+    this.trySubscribe()
   },
 
   setState,
@@ -133,10 +134,6 @@ export default {
       this.unsubscribe();
       this.unsubscribe = null
     }
-  },
-
-  onAttach() {
-    this.trySubscribe();
   },
 
   onDestroy() {

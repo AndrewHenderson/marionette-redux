@@ -32,6 +32,27 @@ var reducers = Redux.combineReducers({
 var compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : Redux.compose;
 var store = compose()(Redux.createStore)(reducers);
 
+// Common Maps
+// ===================
+var mapStateToProps = function(state) {
+  return {
+    bar: state.bar
+  }
+};
+
+// Backbone Models
+// ===================
+var MydModel = Backbone.Model.extend({
+  store: store,
+  componentDidReceiveProps: function(update) {
+    this.set({
+      bar: update.bar
+    })
+  }
+});
+var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(MydModel);
+var connectedModel = new ConnectedModel();
+
 // Marionette Views
 // ===================
 var FooView = Marionette.View.extend({
@@ -39,14 +60,31 @@ var FooView = Marionette.View.extend({
   template: function() {
     return '<button>Toggle</button>'
   },
+  ui: {
+    button: 'button'
+  },
+  modelEvents: {
+    'change:bar': 'onChangeBar'
+  },
   events: {
     'click button': 'onClickButton'
   },
   onClickButton: function() {
     this.props.dispatch(toggleBar())
+  },
+  onChangeBar: function(model, attrs) {
+    if (attrs.isActive) {
+      this.ui.button.css({
+        color: 'black'
+      })
+    } else {
+      this.ui.button.css({
+        color: 'red'
+      })
+    }
   }
 });
-FooView = MarionetteRedux.connect()(FooView);
+var ConnectedFooView = MarionetteRedux.connect()(FooView);
 
 var BarView = Marionette.View.extend({
   store: store,
@@ -69,12 +107,7 @@ var BarView = Marionette.View.extend({
     }
   }
 });
-mapStateToProps = function(state) {
-  return {
-    bar: state.bar
-  }
-};
-BarView = MarionetteRedux.connect(mapStateToProps)(BarView);
+var ConnectedBarView = MarionetteRedux.connect(mapStateToProps)(BarView);
 
 var RootView = Marionette.View.extend({
   template: function() {
@@ -85,8 +118,10 @@ var RootView = Marionette.View.extend({
     bar: '#bar'
   },
   onRender: function() {
-    this.showChildView('foo', new FooView());
-    this.showChildView('bar', new BarView());
+    this.showChildView('foo', new ConnectedFooView({
+      model: connectedModel
+    }));
+    this.showChildView('bar', new ConnectedBarView());
   }
 });
 
