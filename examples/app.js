@@ -51,7 +51,6 @@ var Model = Backbone.Model.extend({
   }
 });
 var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
-var connectedModel = new ConnectedModel();
 
 // Marionette Views
 // ===================
@@ -119,7 +118,7 @@ var RootView = Marionette.View.extend({
   },
   onRender: function() {
     this.showChildView('foo', new ConnectedFooView({
-      model: connectedModel
+      model: new ConnectedModel()
     }));
     this.showChildView('bar', new ConnectedBarView());
   }
