@@ -13,6 +13,7 @@ export default (_mapStateToProps, _mapDispatchToProps, _options) => {
     const mapDispatchToProps = _mapDispatchToProps || Component.prototype.mapDispatchToProps || defaultMapDispatchToProps;
     const store = options.store || Component.prototype.store;
     const componentInitialize = Component.prototype.initialize;
+    const componentonAttach = Component.prototype.onAttach;
     const componentOnDestroy = Component.prototype.onDestroy;
 
     const connectMixin = _.defaults({}, {
@@ -29,16 +30,25 @@ export default (_mapStateToProps, _mapDispatchToProps, _options) => {
         });
 
         if (componentInitialize) {
-          componentInitialize.call(this, initOptions)
+          componentInitialize.apply(this, arguments);
+        }
+      },
+
+      onAttach() {
+
+        mixin.onAttach.apply(this, arguments);
+
+        if (componentonAttach) {
+          componentonAttach.apply(this, arguments)
         }
       },
 
       onDestroy() {
 
-        mixin.onDestroy.call(this);
+        mixin.onDestroy.apply(this, arguments);
 
         if (componentOnDestroy) {
-          componentOnDestroy.call(this)
+          componentOnDestroy.apply(this, arguments);
         }
       }
     }, mixin);

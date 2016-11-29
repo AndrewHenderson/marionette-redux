@@ -81,7 +81,7 @@ var FooView = Marionette.View.extend({
   store: store,
   tagName: 'button',
   template: function() {
-    return 'Toggle'
+    return 'Foo'
   },
   modelEvents: {
     'change:bar': 'onChangeBar'

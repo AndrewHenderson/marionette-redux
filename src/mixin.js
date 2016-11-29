@@ -28,7 +28,9 @@ export default {
     }, this.state);
     this.bindStateEvents();
     this.clearCache();
-    this.trySubscribe()
+    if (!(this instanceof Marionette.View) && !(this instanceof Marionette.Behavior)) {
+      this.trySubscribe()
+    }
   },
 
   setState,
@@ -140,6 +142,10 @@ export default {
       this.unsubscribe();
       this.unsubscribe = null
     }
+  },
+
+  onAttach() {
+    this.trySubscribe()
   },
 
   onDestroy() {
