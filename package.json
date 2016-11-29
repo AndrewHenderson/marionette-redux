@@ -15,9 +15,7 @@
     "url": "https://github.com/AndrewHenderson/marionette-redux.git"
   },
   "github": "https://github.com/AndrewHenderson/marionette-redux",
-  "authors": [
-    "Andrew Henderson <andrew.m.henderson@gmail.com> (https://github.com/AndrewHenderson)"
-  ],
+  "author": "Andrew Henderson <andrew.m.henderson@gmail.com> (https://github.com/AndrewHenderson)",
   "dependencies": {
     "backbone.marionette": "^3.1.0",
     "underscore": "^1.8.3"

@@ -13,7 +13,7 @@ export default (_mapStateToProps, _mapDispatchToProps, _options) => {
     const mapDispatchToProps = _mapDispatchToProps || Component.prototype.mapDispatchToProps || defaultMapDispatchToProps;
     const store = options.store || Component.prototype.store;
     const componentInitialize = Component.prototype.initialize;
-    const componentonAttach = Component.prototype.onAttach;
+    const componentonRender = Component.prototype.onRender;
     const componentOnDestroy = Component.prototype.onDestroy;
 
     const connectMixin = _.defaults({}, {
@@ -34,12 +34,12 @@ export default (_mapStateToProps, _mapDispatchToProps, _options) => {
         }
       },
 
-      onAttach() {
+      onRender() {
 
-        mixin.onAttach.apply(this, arguments);
+        mixin.onRender.apply(this, arguments);
 
-        if (componentonAttach) {
-          componentonAttach.apply(this, arguments)
+        if (componentonRender) {
+          componentonRender.apply(this, arguments)
         }
       },
 

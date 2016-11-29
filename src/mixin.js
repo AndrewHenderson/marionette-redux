@@ -144,7 +144,7 @@ export default {
     }
   },
 
-  onAttach() {
+  onRender() {
     this.trySubscribe()
   },
 
