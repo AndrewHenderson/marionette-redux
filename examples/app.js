@@ -16,7 +16,6 @@ var reducers = Redux.combineReducers({
     };
 
     switch (action.type) {
-
       case 'TOGGLE_BAR':
         state.isActive = !state.isActive;
         return state;
@@ -25,14 +24,14 @@ var reducers = Redux.combineReducers({
         return state;
     }
   }
-})
+});
 
 // Redux Store
 // ===================
 var compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : Redux.compose;
 var store = compose()(Redux.createStore)(reducers);
 
-// Common Maps
+// Shared Mapping
 // ===================
 var mapStateToProps = function(state) {
   return {
@@ -59,32 +58,42 @@ var Model = Backbone.Model.extend({
 });
 var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 
+// Marionette Behavior
+var MyBehavior = Marionette.Behavior.extend({
+  store: store,
+  events: {
+    'click': 'onClick'
+  },
+  onClick: function() {
+    this.props.dispatchToggleBar()
+  }
+});
+var ConnectedBehavior = MarionetteRedux.connect(null, mapDispatchToProps)(MyBehavior);
+
 // Marionette Views
 // ===================
 var FooView = Marionette.View.extend({
   store: store,
+  tagName: 'button',
   template: function() {
-    return '<button>Toggle</button>'
-  },
-  ui: {
-    button: 'button'
+    return 'Toggle'
   },
   modelEvents: {
     'change:bar': 'onChangeBar'
   },
   events: {
-    'click button': 'onClickButton'
+    'click': 'onClick'
   },
-  onClickButton: function() {
+  onClick: function() {
     this.props.dispatchToggleBar()
   },
   onChangeBar: function(model, attrs) {
     if (attrs.isActive) {
-      this.ui.button.css({
+      this.$el.css({
         color: 'black'
       })
     } else {
-      this.ui.button.css({
+      this.$el.css({
         color: 'red'
       })
     }
@@ -115,19 +124,29 @@ var BarView = Marionette.View.extend({
 });
 var ConnectedBarView = MarionetteRedux.connect(mapStateToProps)(BarView);
 
+var BazView = Marionette.View.extend({
+  tagName: 'button',
+  template: function() {
+    return 'Baz'
+  },
+  behaviors: [ConnectedBehavior]
+});
+
 var RootView = Marionette.View.extend({
   template: function() {
-    return '<div id="foo"></div><div id="bar"></div>'
+    return '<div id="foo"></div><div id="bar"></div><div id="baz"></div>'
   },
   regions: {
     foo: '#foo',
-    bar: '#bar'
+    bar: '#bar',
+    baz: '#baz'
   },
   onRender: function() {
     this.showChildView('foo', new ConnectedFooView({
       model: new ConnectedModel()
     }));
     this.showChildView('bar', new ConnectedBarView());
+    this.showChildView('baz', new BazView());
   }
 });
 
