@@ -39,6 +39,13 @@ var mapStateToProps = function(state) {
     bar: state.bar
   }
 };
+var mapDispatchToProps = function(dispatch) {
+  return {
+    dispatchToggleBar: function() {
+      dispatch(toggleBar())
+    }
+  }
+};
 
 // Backbone Models
 // ===================
@@ -69,7 +76,7 @@ var FooView = Marionette.View.extend({
     'click button': 'onClickButton'
   },
   onClickButton: function() {
-    this.props.dispatch(toggleBar())
+    this.props.dispatchToggleBar()
   },
   onChangeBar: function(model, attrs) {
     if (attrs.isActive) {
@@ -83,7 +90,7 @@ var FooView = Marionette.View.extend({
     }
   }
 });
-var ConnectedFooView = MarionetteRedux.connect()(FooView);
+var ConnectedFooView = MarionetteRedux.connect(null, mapDispatchToProps)(FooView);
 
 var BarView = Marionette.View.extend({
   store: store,
