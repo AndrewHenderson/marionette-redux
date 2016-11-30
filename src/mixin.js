@@ -5,6 +5,7 @@ import defaultMapDispatchToProps from './mapDispatchToProps'
 import defaultMergeProps from './mergeProps'
 import setState from './setState'
 import getState from './getState'
+import isDisplayComponent from './isDisplayComponent';
 
 export default {
 
@@ -16,20 +17,26 @@ export default {
     this.mapDispatch = options.mapDispatchToProps || this.mapDispatchToProps || defaultMapDispatchToProps;
     this.mergeProps = options.mergeProps || this.mergeProps || defaultMergeProps;
     this.props = this.props || {};
+
     if (options.props) {
       _.extend(this.props, options.props)
     }
+
     this.store = options.store || this.store;
+
     if (!this.store && window && window.store) {
       this.store = window.store
     }
+
     const storeState = this.store.getState();
     this.state = _.defaults({
       storeState: storeState
     }, this.state);
+
     this.bindStateEvents();
     this.clearCache();
-    if (!(this instanceof Marionette.View) && !(this instanceof Marionette.Behavior)) {
+
+    if (!isDisplayComponent(this)) {
       this.trySubscribe()
     }
   },

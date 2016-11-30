@@ -3,6 +3,7 @@ import defaultMapStateToProps from './mapStateToProps'
 import defaultMapDispatchToProps from './mapDispatchToProps'
 import defaultMergeProps from './mergeProps'
 import mixin from './mixin'
+import isDisplayComponent from './isDisplayComponent';
 
 export default (_mapStateToProps, _mapDispatchToProps, _mergeProps, _options) => {
 
@@ -18,7 +19,7 @@ export default (_mapStateToProps, _mapDispatchToProps, _mergeProps, _options) =>
     const componentonRender = Component.prototype.onRender;
     const componentOnDestroy = Component.prototype.onDestroy;
 
-    const connectMixin = _.defaults({}, {
+    let connectMixin = _.defaults({}, {
 
       initialize(_initOptions) {
 
@@ -55,6 +56,10 @@ export default (_mapStateToProps, _mapDispatchToProps, _mergeProps, _options) =>
         }
       }
     }, mixin);
+
+    if (!isDisplayComponent(Component)) {
+      connectMixin = _.omit(connectMixin, 'onRender')
+    }
 
     return Component.extend(connectMixin)
   }
