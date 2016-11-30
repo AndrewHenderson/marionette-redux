@@ -1,3 +1,13 @@
+// Marionette
+// ===================
+Marionette.Renderer.render = function(template, data, view) {
+  if (typeof template === 'function') {
+    return template.call(view, data);
+  } else {
+    return template;
+  }
+};
+
 // Action Creators
 // ===================
 function toggleBar() {
@@ -37,7 +47,7 @@ window.store = store;
 var mapStateToProps = function(state, ownProps) {
   return {
     bar: state.bar,
-    currency: ownProps.currency
+    inAmerica: ownProps.currency === 'USD'
   }
 };
 var mapDispatchToProps = function(dispatch) {
@@ -57,14 +67,15 @@ var Model = Backbone.Model.extend({
   },
   componentDidReceiveProps: function(update) {
     this.set({
-      bar: update.bar
+      bar: update.bar,
+      currency: update.currency
     })
   }
 });
 var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 
-// Marionette Behavior
-// ===================
+// Marionette Behaviors
+// ======================
 var MyBehavior = Marionette.Behavior.extend({
   events: {
     'click': 'onClick'
@@ -80,8 +91,8 @@ var ConnectedBehavior = MarionetteRedux.connect(null, mapDispatchToProps)(MyBeha
 var FooView = Marionette.View.extend({
   store: store,
   tagName: 'button',
-  template: function() {
-    return 'Foo'
+  template: function(data) {
+    return 'Foo: ' + data.currency
   },
   modelEvents: {
     'change:bar': 'onChangeBar'
@@ -109,14 +120,16 @@ var ConnectedFooView = MarionetteRedux.connect(null, mapDispatchToProps)(FooView
 var BarView = Marionette.View.extend({
   store: store,
   template: function() {
-    return '<span>Bar</span>'
+    return '<span>Bar: ' + this.props.inAmerica + '</span>'
   },
   stateEvents: {
-    'change:bar': 'onChangeBar'
+    'change:bar': 'onChangeBar',
+    'change:inAmerica': 'render'
   },
   componentDidReceiveProps: function(update) {
     this.setState({
-      bar: update.bar
+      bar: update.bar,
+      inAmerica: update.inAmerica
     })
   },
   onChangeBar: function(view, state) {
@@ -129,6 +142,21 @@ var BarView = Marionette.View.extend({
 });
 var ConnectedBarView = MarionetteRedux.connect(mapStateToProps)(BarView);
 
+var StatusView = Marionette.View.extend({
+  template: function() {
+    return '<span>' + this.props.label + ': ' + this.props.isActive + '</span>'
+  },
+  componentDidReceiveProps: function() {
+    this.render()
+  }
+});
+var statusMapStateToProps = function(state) {
+  return {
+    isActive: state.bar.isActive
+  }
+};
+var ConnectedStatusView = MarionetteRedux.connect(statusMapStateToProps)(StatusView);
+
 var BazView = Marionette.View.extend({
   tagName: 'button',
   template: function() {
@@ -139,12 +167,13 @@ var BazView = Marionette.View.extend({
 
 var RootView = Marionette.View.extend({
   template: function() {
-    return '<div id="foo"></div><div id="bar"></div><div id="baz"></div>'
+    return '<div id="foo"></div><div id="bar"></div><div id="baz"></div><div id="status"></div>'
   },
   regions: {
     foo: '#foo',
     bar: '#bar',
-    baz: '#baz'
+    baz: '#baz',
+    status: '#status'
   },
   onRender: function() {
     this.showChildView('foo', new ConnectedFooView({
@@ -156,8 +185,14 @@ var RootView = Marionette.View.extend({
       }
     }));
     this.showChildView('baz', new BazView());
+    this.showChildView('status', new ConnectedStatusView({
+      props: {
+        label: 'Current Status'
+      }
+    }));
   }
 });
+var ConnectedRootView = MarionetteRedux.connect(mapStateToProps)(RootView);
 
 // Marionette Application
 // ==========================
@@ -165,7 +200,7 @@ var App = Marionette.Application.extend({
   region: '#root-element',
 
   onStart: function() {
-    this.showView(new RootView());
+    this.showView(new ConnectedRootView());
   }
 });
 
