@@ -22,7 +22,7 @@ export default {
       _.extend(this.props, options.props)
     }
 
-    this.store = options.store || this.store;
+    this.store = options.store || this.store
 
     if (!this.store && window && window.store) {
       this.store = window.store
@@ -31,7 +31,7 @@ export default {
     const storeState = this.store.getState();
     this.state = _.defaults({
       storeState: storeState
-    }, this.state);
+    }, this.getInitialState());
 
     this.bindStateEvents();
     this.clearCache();
@@ -39,6 +39,10 @@ export default {
     if (!isDisplayComponent(this)) {
       this.trySubscribe()
     }
+  },
+
+  getInitialState() {
+    return {}
   },
 
   setState,
