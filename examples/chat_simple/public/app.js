@@ -38,12 +38,14 @@ var MessageView = MarionetteRedux.connect()(Marionette.View.extend({
     click: 'handleClick'
   },
   handleClick: function() {
-    this.props.dispatch(deleteMessage(this.collection.indexOf(this.model)))
+    this.props.dispatch(deleteMessage(this.model.collection.indexOf(this.model)))
   }
 }));
 
 var messagesMapStateToProps = function(state) {
-  return state;
+  return {
+    messages: state.messages
+  }
 };
 var MessagesView = MarionetteRedux.connect(messagesMapStateToProps)(Marionette.CollectionView.extend({
   childView: MessageView,

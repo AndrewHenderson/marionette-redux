@@ -25,7 +25,7 @@ var reducers = Redux.combineReducers({
         message: action.message
       })
     } else if (action.type === 'DELETE_MESSAGE') {
-      return _.join(state.slice(0, action.index), state.slice(action.index + 1, state.length))
+      return state.slice(0, action.index).concat(state.slice(action.index + 1, state.length))
     } else {
       return state
     }
