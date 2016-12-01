@@ -23,7 +23,7 @@ If you don’t yet use [npm](http://npmjs.com/) or a modern module bundler, and 
 
 ## How Does It Work?
 
-By providing a way to bind a Redux store to the Marionette View and/or Backbone Model/Collection lifecycles.
+Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
 
 There is an excellent video on how React Redux works in [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A).
 
@@ -33,7 +33,9 @@ You can also check out some demos below or the [examples](https://github.com/And
 
 ## Demo
 ### `connect`
-Marionette Redux allows you to `connect` any Marionette or Backbone "component" to the Redux store. Here's an example of a `Marionette.View`. The following could just as easily be a `Marionette.Behavior`:
+Below is an example of a `Marionette.View` that has been subscribed to a Redux store, however, the following could just as easily be a `Marionette.Behavior`.
+
+__Note: In the following example, `store` is placed on the View itself, but `connect` will also look at `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".__
 ```js
 var mapStateToProps = 
 var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.extend({
@@ -64,7 +66,6 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
   }
 }));
 ```
-* Note: `store` is placed on the View, but `connect` will also look on `window.store` as a last resort. *
 You can also put `mapStateToProps` as a property on the View itself, like so:
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
@@ -95,9 +96,9 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
   }
 }));
 ```
-Or, like mapStateToProps, this can be on the passed to `connect` as well:
+Or, like `mapStateToProps`, `mapDispatchToProps` can be on the passed to `connect` as well:
 ```js
-var ConnectedView = MarionetteRedux.connect(mapDispatchToProps)(Marionette.View.extend({
+var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({
     . . .
 }));
 ```
