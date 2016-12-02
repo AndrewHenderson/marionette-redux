@@ -1,3 +1,3 @@
-export default function(attr) {
+export default function getState(attr) {
   return this.state[attr];
 }

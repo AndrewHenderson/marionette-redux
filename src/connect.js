@@ -5,7 +5,7 @@ import defaultMergeProps from './mergeProps'
 import mixin from './mixin'
 import isDisplayComponent from './isDisplayComponent';
 
-export default (_mapStateToProps, _mapDispatchToProps, _mergeProps, _options) => {
+export default function connect(_mapStateToProps, _mapDispatchToProps, _mergeProps, _options) {
 
   const options = _options || {};
 

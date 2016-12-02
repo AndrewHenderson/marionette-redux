@@ -7,7 +7,7 @@ import setState from './setState'
 import getState from './getState'
 import isDisplayComponent from './isDisplayComponent';
 
-export default {
+const mixin = {
 
   initialize(_options) {
 
@@ -213,3 +213,5 @@ export default {
     })
   }
 };
+
+export default mixin;

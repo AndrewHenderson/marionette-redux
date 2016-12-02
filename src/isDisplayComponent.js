@@ -1,6 +1,6 @@
 import Marionette from 'marionette'
 
-export default function(Component) {
+export default function isDisplayComponent(Component) {
   if (typeof Component === 'object') {
     return Component instanceof Marionette.View || Component instanceof Marionette.Behavior
   }

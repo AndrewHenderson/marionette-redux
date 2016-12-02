@@ -1,6 +1,6 @@
 import _ from 'underscore';
 
-export default function(key, val, options) {
+export default function setState(key, val, options) {
 
   if (key == null) {
     return this;

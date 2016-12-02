@@ -1,1 +1,3 @@
-export default state => ({})
+export default function mapStateToProps() {
+  return {}
+}

@@ -1,1 +1,5 @@
-export default dispatch => ({ dispatch })
+export default function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch
+  }
+}

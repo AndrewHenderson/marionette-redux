@@ -9,6 +9,7 @@ import runSequence from 'run-sequence';
 
 import { rollup } from 'rollup';
 import babel from 'rollup-plugin-babel';
+import 'babel-preset-es2015-rollup';
 import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 
@@ -35,7 +36,7 @@ function _generate(bundle){
 function bundle() {
   return rollup({
     entry: srcPath + name + '.js',
-    external: ['marionette', 'underscore', 'backbone.radio'],
+    external: ['underscore', 'backbone.radio', 'marionette'],
     plugins: [
       json(),
       nodeResolve({
