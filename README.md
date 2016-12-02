@@ -46,11 +46,6 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
   stateEvents: {
     'change:isActive': 'handleChangeisActive'
   },
-  handleClick: function() {
-    this.props.dispatch({
-      type: 'MY_EVENT'
-    });
-  },
   getInitialState: function() {
     return: {
       isActive: false
@@ -59,6 +54,11 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
   componenetDidReceiveProps: function(update) {
     this.setState({
       isActive: update.isActive
+    });
+  },
+  handleClick: function() {
+    this.props.dispatch({
+      type: 'MY_EVENT'
     });
   },
   handleChangeIsActive: function(view, isActive) {
@@ -96,7 +96,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
   }
 }));
 ```
-Or, like `mapStateToProps`, `mapDispatchToProps` can be on the passed to `connect` as well:
+Or, like `mapStateToProps`, `mapDispatchToProps` can be passed to `connect` as well:
 ```js
 var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({
     . . .
@@ -124,7 +124,7 @@ var ConnectedModel = MarionetteRedux.connect()(Model);
 If you'd rather use a mixin instead of `connect`, you can do so like this:
 ```js
 Marionette.View.extend(_.extend({
- . . .
+ …
 }, mixin));
 ```
 ### `setState` and `getState`
