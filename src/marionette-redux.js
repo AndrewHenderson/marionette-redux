@@ -1,7 +1,9 @@
 import connect from './connect'
 import mixin from './mixin'
 
-export {
-  connect,
-  mixin
-}
+const MarionetteRedux = {};
+
+MarionetteRedux.connect = connect;
+MarionetteRedux.mixin = mixin;
+
+export default MarionetteRedux;
