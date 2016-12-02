@@ -1,6 +1,6 @@
 // Marionette Redux
 // ----------------------------------
-// v0.1.3
+// v0.1.4
 //
 // Copyright (c)2016 Andrew Henderson.
 // Distributed under MIT license
