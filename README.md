@@ -6,11 +6,11 @@ Performant and flexible.
 
 ## How Does It Work?
 
-This is mostly a port of [React-Redux](https://github.com/reactjs/react-redux). It's like that, but for Marionette and Backbone.
-
 Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
 
-There is an excellent video on how React Redux works in [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A).
+This code is mostly a port of [React-Redux](https://github.com/reactjs/react-redux), so it's like that, but for Marionette and Backbone.
+
+There is an excellent video on how React Redux works in [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A), which I recommend.
 
 You can also check out some demos below or the [examples](https://github.com/AndrewHenderson/marionette-redux/tree/master/examples). Enjoy!
 
