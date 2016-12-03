@@ -138,6 +138,9 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
   }
   stateEvents: {
     'change:foo': 'handleFooChange'
+  },
+  handelFooChange: function(view, foo) {
+    console.log("Foo changed to " + foo + "!"); // Foo changed to bar!
   }
 }));
 var connectedView = new ConnectedView();
