@@ -1,11 +1,11 @@
 import connect from './connect'
 import mixin from './mixin'
-import { version } from '../package.json'
+import { version as VERSION } from '../package.json'
 
-const MarionetteRedux = {};
+const MarionetteRedux = {
+  connect,
+  mixin,
+  VERSION
+}
 
-MarionetteRedux.connect = connect;
-MarionetteRedux.mixin = mixin;
-MarionetteRedux.VERSION = version;
-
-export default MarionetteRedux;
+export default MarionetteRedux
