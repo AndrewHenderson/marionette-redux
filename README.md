@@ -1,17 +1,30 @@
 Marionette Redux
 =========================
 
-[Marionette](https://github.com/marionettejs/backbone.marionette) bindings for [Redux](https://github.com/reactjs/redux).  
+[Marionette](https://github.com/marionettejs/backbone.marionette) bindings for [Redux](https://github.com/reactjs/redux) with support for [Backbone](https://github.com/jashkenas/backbone).  
 Performant and flexible.
+
+## How Does It Work?
+
+This is mostly a port of [React-Redux](https://github.com/reactjs/react-redux). It's like that, but for Marionette and Backbone.
+
+Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
+
+There is an excellent video on how React Redux works in [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A).
+
+You can also check out some demos below or the [examples](https://github.com/AndrewHenderson/marionette-redux/tree/master/examples). Enjoy!
+
+## How can I use this project?
+
+My personal goal is to allow the codebase I work on to migrate the business logic out of Backbone Models and Collections and into Redux, then rewrite the existing view layer in React at a later point.
+
+In the interim, new components can be written in React with the ability to communicate with a shared data event API.
 
 ## Installation
 
 ```
 npm install --save marionette-redux
 ```
-
-This assumes that you’re using [npm](http://npmjs.com/) package manager with a module bundler like [Webpack](http://webpack.github.io) or [Browserify](http://browserify.org/) to consume [CommonJS modules](http://webpack.github.io/docs/commonjs.html).
-
 If you don’t yet use [npm](http://npmjs.com/) or a modern module bundler, and would rather prefer a single-file [UMD](https://github.com/umdjs/umd) build that makes `MarionetteRedux` available as a global object.
 
 ## Documentation
@@ -21,17 +34,6 @@ If you don’t yet use [npm](http://npmjs.com/) or a modern module bundler, and 
   - [`mixin`](docs/api.md#mixin)
 - [Troubleshooting](docs/troubleshooting.md#troubleshooting)
 
-## How Does It Work?
-
-Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
-
-There is an excellent video on how React Redux works in [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A).
-
-If you understand that and Marionette, you should be ready to apply Marionette Redux in your applicaltion.
-
-You can also check out some demos below or the [examples](https://github.com/AndrewHenderson/marionette-redux/tree/master/examples). Enjoy!
-
-## Demo
 ### `connect`
 Below is an example of a `Marionette.View` that has been subscribed to a Redux store, however, the following could just as easily be a `Marionette.Behavior`.
 
@@ -44,7 +46,7 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
     click: 'handleClick'
   },
   stateEvents: {
-    'change:isActive': 'handleChangeisActive'
+    'change:isActive': 'handleisActiveChange'
   },
   getInitialState: function() {
     return: {
@@ -61,7 +63,7 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
       type: 'MY_EVENT'
     });
   },
-  handleChangeIsActive: function(view, isActive) {
+  handleisActiveChange: function(view, isActive) {
     this.$el.toggleClass('active', isActive);
   }
 }));
@@ -99,7 +101,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 Or, like `mapStateToProps`, `mapDispatchToProps` can be passed to `connect` as well:
 ```js
 var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({
-    . . .
+    …
 }));
 ```
 ### `Backbone.Model` and `Backbone.Collection`
@@ -123,12 +125,25 @@ var ConnectedModel = MarionetteRedux.connect()(Model);
 ### `mixin`
 If you'd rather use a mixin instead of `connect`, you can do so like this:
 ```js
-Marionette.View.extend(_.extend({
- …
-}, mixin));
+Marionette.View.extend(mixin);
 ```
 ### `setState` and `getState`
-We've also added the `setState` and `getState` for convenient view layer state event changes. This works exactly the same as Marionette's `modelEvents` listeners, using the `stateEvents` object to define listeners.
+We've also added the `setState` and `getState` for convenient view layer state event changes. This works exactly the same as Marionette's `modelEvents` listeners, using the `stateEvents` object to define listeners:
+```js
+var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
+  getInitialState: function() {
+    return {
+      foo: null
+    }
+  }
+  stateEvents: {
+    'change:foo': 'handleFooChange'
+  }
+}));
+var connectedView = new ConnectedView();
+connectedView.setState({ foo: 'bar' }); // or connectedView.setState('foo', 'bar');
+connectedView.getState('foo'); // "bar"
+```
 
 ## License
 
