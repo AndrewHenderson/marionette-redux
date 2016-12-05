@@ -19,7 +19,7 @@ You can also check out some demos below or the [examples](https://github.com/And
 
 My personal goal is to allow the codebase I work on to migrate the business logic out of `Backbone.Model`s and `Backbone.Collection`s and into Redux. Thus, creating a shared API that can be leveraged by both connected `Marionette.View`s and `React.Component`s.
 
-Newer components can then be written in React and the data be kept in sync with the existing `Mariontte.View` models and collections. The Marionette views themselves can then be more easily be rewritten when time allows.
+Newer components can then be written in React and the data kept in sync with the existing `Mariontte.View` models and collections. The Marionette views themselves can then be more easily be rewritten when time allows.
 
 ## Installation
 
@@ -76,8 +76,9 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
   }
 }));
 ```
+## `componentDidReceiveProps`
 
-__The most noteworthy part of the previous example is `componentDidReceiveProps` which passes any changes which have been described in the object returned by `mapStateToProps`.__
+__The most noteworthy part of the previous example is `componentDidReceiveProps` which passes any changes that have been described in the object returned by `mapStateToProps`.__
 
 ## `mapStateToProps` and `mapDispatchToProps`
 
