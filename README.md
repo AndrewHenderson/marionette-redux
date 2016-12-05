@@ -17,9 +17,9 @@ You can also check out some demos below or the [examples](https://github.com/And
 
 ## How can I use this project?
 
-My personal goal is to allow the codebase I work on to migrate the business logic out of Backbone Models and Collections and into Redux, then rewrite the existing view layer in React at a later point.
+My personal goal is to allow the codebase I work on to migrate the business logic out of `Backbone.Model`s and `Backbone.Collection`s and into Redux. Thus, creating a shared API that can be leveraged by both connected `Marionette.View`s and `React.Component`s.
 
-In the interim, new components can be written in React with the ability to communicate with a shared data event API.
+Newer components can then be written in React and the data be kept in sync with the existing `Mariontte.View` models and collections. The Marionette views themselves can then be more easily be rewritten when time allows.
 
 ## Installation
 
