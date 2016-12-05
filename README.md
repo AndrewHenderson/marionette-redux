@@ -1,14 +1,15 @@
 Marionette Redux
 =========================
 
-[Marionette](https://github.com/marionettejs/backbone.marionette) bindings for [Redux](https://github.com/reactjs/redux) with support for [Backbone](https://github.com/jashkenas/backbone).  
+[Marionette](https://github.com/marionettejs/backbone.marionette) bindings for [Redux](https://github.com/reactjs/redux) with support for [Backbone](https://github.com/jashkenas/backbone).
+
 Performant and flexible.
 
 ## How Does It Work?
 
-Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
+It's like [React-Redux](https://github.com/reactjs/react-redux), but for Marionette and Backbone.
 
-This code is mostly a port of [React-Redux](https://github.com/reactjs/react-redux), so it's like that, but for Marionette and Backbone.
+Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
 
 There is an excellent video on how React Redux works in [this readthesource episode](https://www.youtube.com/watch?v=VJ38wSFbM3A), which I recommend.
 
@@ -39,21 +40,25 @@ Below is an example of a `Marionette.View` that has been subscribed to a Redux s
 
 __Note: In the following example, `store` is placed on the View itself, but `connect` will also look at `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".__
 ```js
-var mapStateToProps = 
+var mapStateToProps = function(state) {
+  return {
+    isActive: state.isActive
+  }
+}
 var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.extend({
   store: store,
   events: {
     click: 'handleClick'
   },
   stateEvents: {
-    'change:isActive': 'handleisActiveChange'
+    'change:isActive': 'handleIsActiveChange'
   },
   getInitialState: function() {
     return: {
       isActive: false
     }
   },
-  componenetDidReceiveProps: function(update) {
+  componentDidReceiveProps: function(update) {
     this.setState({
       isActive: update.isActive
     });
@@ -63,7 +68,7 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
       type: 'MY_EVENT'
     });
   },
-  handleisActiveChange: function(view, isActive) {
+  handleIsActiveChange: function(view, isActive) {
     this.$el.toggleClass('active', isActive);
   }
 }));
@@ -107,6 +112,11 @@ var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette
 ### `Backbone.Model` and `Backbone.Collection`
 You can `connect` `Backbone.Model` and `Backbone.Collection` as well!
 ```js
+var mapStateToProps = function(state) {
+  return {
+    currency: state.currency
+  }
+}
 var Model = Backbone.Model.extend({
   store: store,
   mapStateToProps: function(state) {
@@ -120,7 +130,7 @@ var Model = Backbone.Model.extend({
     })
   }
 });
-var ConnectedModel = MarionetteRedux.connect()(Model);
+var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 ```
 ### `mixin`
 If you'd rather use a mixin instead of `connect`, you can do so like this:
