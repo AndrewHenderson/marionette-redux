@@ -77,7 +77,7 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
 }));
 ```
 
-__The most noteworthy part of the previous example is `componentDidReceiveProps` which passes any changes which have been described in the object returned by `mapStateToProps`.
+__The most noteworthy part of the previous example is `componentDidReceiveProps` which passes any changes which have been described in the object returned by `mapStateToProps`.__
 
 ## `mapStateToProps` and `mapDispatchToProps`
 
