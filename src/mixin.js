@@ -1,8 +1,21 @@
-import _ from 'underscore';
-import Marionette from 'marionette'
-import defaultMapStateToProps from './mapStateToProps'
-import defaultMapDispatchToProps from './mapDispatchToProps'
-import defaultMergeProps from './mergeProps'
+import {
+  extend,
+  defaults,
+  clone,
+  each,
+  isEqual,
+  isFunction,
+  isObject
+} from 'underscore';
+import {
+  bindEvents,
+  bindEntityEvents,
+  unbindEvents,
+  unbindEntityEvents
+} from 'backbone.marionette';
+import defaultMapStateToProps from './mapStateToProps';
+import defaultMapDispatchToProps from './mapDispatchToProps';
+import defaultMergeProps from './mergeProps';
 import isDisplayComponent from './isDisplayComponent';
 
 const mixin = {
@@ -17,17 +30,17 @@ const mixin = {
     this.props = this.props || {};
 
     if (options.props) {
-      _.extend(this.props, options.props)
+      extend(this.props, options.props)
     }
 
-    this.store = options.store || this.store
+    this.store = options.store || this.store;
 
     if (!this.store && window && window.store) {
       this.store = window.store
     }
 
     const storeState = this.store.getState();
-    this.state = _.defaults({
+    this.state = defaults({
       storeState: storeState
     }, this.getInitialState());
 
@@ -51,7 +64,7 @@ const mixin = {
 
     // Handle both `"key", value` and `{key: value}` -style arguments.
     let state;
-    if (typeof key === 'object') {
+    if (isObject(key)) {
       state = key;
       options = val;
     } else {
@@ -68,7 +81,7 @@ const mixin = {
     this._changing = true;
 
     if (!changing) {
-      this._previousState = _.clone(this.state);
+      this._previousState = clone(this.state);
       this.changed = {};
     }
 
@@ -77,11 +90,11 @@ const mixin = {
     const prev    = this._previousState;
 
     // For each `set` state, update or delete the current value.
-    _.each(state, function(_val, _key) {
-      if (!_.isEqual(current[_key], _val)) {
+    each(state, function(_val, _key) {
+      if (!isEqual(current[_key], _val)) {
         changes.push(_key);
       }
-      if (!_.isEqual(prev[_key], _val)) {
+      if (!isEqual(prev[_key], _val)) {
         changed[_key] = _val;
       } else {
         delete changed[_key];
@@ -121,17 +134,15 @@ const mixin = {
   },
 
   bindStateEvents() {
-    let bind;
+    const bind = bindEvents || bindEntityEvents;
     if (this.stateEvents) {
-      bind = Marionette.bindEvents || Marionette.bindEntityEvents;
       bind(this, this, this.stateEvents)
     }
   },
 
   unbindStateEvents() {
-    let unbind;
+    const unbind = unbindEvents || unbindEntityEvents;
     if (this.stateEvents) {
-      unbind = Marionette.unbindEvents || Marionette.unbindEntityEvents;
       unbind(this, this, this.stateEvents)
     }
   },
@@ -151,7 +162,7 @@ const mixin = {
 
   configureFinalMapState(store, props) {
     const mappedState = this.mapState(store.getState(), props);
-    const isFactory = _.isFunction(mappedState);
+    const isFactory = isFunction(mappedState);
 
     this.finalMapStateToProps = isFactory ? mappedState : this.mapState;
     this.doStatePropsDependOnOwnProps = this.finalMapStateToProps.length !== 1;
@@ -165,7 +176,7 @@ const mixin = {
 
   updateStatePropsIfNeeded() {
     const nextStateProps = this.computeStateProps(this.store, this.props);
-    if (this.stateProps && _.isEqual(nextStateProps, this.stateProps)) {
+    if (this.stateProps && isEqual(nextStateProps, this.stateProps)) {
       return false
     }
 
@@ -189,7 +200,7 @@ const mixin = {
 
   configureFinalMapDispatch(store, props) {
     const mappedDispatch = this.mapDispatch(store.dispatch, props);
-    const isFactory = _.isFunction(mappedDispatch);
+    const isFactory = isFunction(mappedDispatch);
 
     this.finalMapDispatchToProps = isFactory ? mappedDispatch : this.mapDispatch;
     this.doDispatchPropsDependOnOwnProps = this.finalMapDispatchToProps.length !== 1;
@@ -203,7 +214,7 @@ const mixin = {
 
   updateDispatchPropsIfNeeded() {
     const nextDispatchProps = this.computeDispatchProps(this.store, this.props);
-    if (this.dispatchProps && _.isEqual(nextDispatchProps, this.dispatchProps)) {
+    if (this.dispatchProps && isEqual(nextDispatchProps, this.dispatchProps)) {
       return false
     }
 
@@ -213,7 +224,7 @@ const mixin = {
   },
 
   isSubscribed() {
-    return _.isFunction(this.unsubscribe)
+    return isFunction(this.unsubscribe)
   },
 
   trySubscribe() {
@@ -264,7 +275,7 @@ const mixin = {
 
     const storeState = this.store.getState();
     const prevStoreState = this.getState('storeState');
-    if (this.haveInitialStatePropsBeenDetermined && _.isEqual(prevStoreState, storeState)) {
+    if (this.haveInitialStatePropsBeenDetermined && isEqual(prevStoreState, storeState)) {
       return
     }
 
@@ -276,7 +287,7 @@ const mixin = {
       const mergedProps = this.mergeProps(this.stateProps, this.dispatchProps, this.props);
       this.props = mergedProps;
 
-      _.isFunction(this.componentDidReceiveProps) && this.componentDidReceiveProps(mergedProps)
+      isFunction(this.componentDidReceiveProps) && this.componentDidReceiveProps(mergedProps)
     }
 
     this.setState({

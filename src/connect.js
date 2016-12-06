@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { defaults, omit } from 'underscore';
 import defaultMapStateToProps from './mapStateToProps'
 import defaultMapDispatchToProps from './mapDispatchToProps'
 import defaultMergeProps from './mergeProps'
@@ -19,7 +19,7 @@ export default function connect(_mapStateToProps, _mapDispatchToProps, _mergePro
     const componentonRender = Component.prototype.onRender;
     const componentOnDestroy = Component.prototype.onDestroy;
 
-    let connectMixin = _.defaults({}, {
+    let connectMixin = defaults({}, {
 
       initialize(_initOptions) {
 
@@ -58,7 +58,7 @@ export default function connect(_mapStateToProps, _mapDispatchToProps, _mergePro
     }, mixin);
 
     if (!isDisplayComponent(Component)) {
-      connectMixin = _.omit(connectMixin, 'onRender')
+      connectMixin = omit(connectMixin, 'onRender')
     }
 
     return Component.extend(connectMixin)

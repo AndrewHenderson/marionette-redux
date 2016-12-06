@@ -26,9 +26,8 @@ function _generate(bundle){
     sourceMap: true,
     banner: banner,
     globals: {
-      'marionette': 'Marionette',
-      'backbone.radio': 'Radio',
-      'underscore': '_'
+      'underscore': '_',
+      'backbone.marionette': 'Marionette'
     }
   });
 }
@@ -36,7 +35,7 @@ function _generate(bundle){
 function bundle() {
   return rollup({
     entry: srcPath + name + '.js',
-    external: ['underscore', 'backbone.radio', 'marionette'],
+    external: ['underscore', 'backbone.marionette'],
     plugins: [
       json(),
       nodeResolve({
@@ -49,16 +48,16 @@ function bundle() {
         exclude: 'node_modules/**'
       })
     ]
-  }).then(bundle => {
+  }).then(function(bundle) {
     return _generate(bundle);
-  }).then(gen => {
+  }).then(function(gen) {
       gen.code += '\n//# sourceMappingURL=' + gen.map.toUrl();
     return gen;
   })
 }
 
 gulp.task('build-lib', ['lint-src'], function(){
-  return bundle().then(gen => {
+  return bundle().then(function(gen) {
     return file(name + '.js', gen.code, {src: true})
       .pipe(plumber())
       .pipe(sourcemaps.init({loadMaps: true}))
