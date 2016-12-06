@@ -40,7 +40,7 @@ If you don’t yet use [npm](http://npmjs.com/) or a modern module bundler, and 
 
 Below is an example of a `Marionette.View` that has been subscribed to a Redux store, however, the following could just as easily be a `Marionette.Behavior`.
 
-__Note: In the following example, `store` is placed on the View itself, but `connect` will also look at `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".__
+__Note:__ In the following example, `store` is placed on the View itself, but `connect` will also look at `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".
 
 ```js
 var mapStateToProps = function(state) {
@@ -78,7 +78,7 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
 ```
 ## `componentDidReceiveProps`
 
-__The most noteworthy part of the previous example is `componentDidReceiveProps` which passes any changes that have been described in the object returned by `mapStateToProps`.__
+__The most noteworthy__ part of the previous example is `componentDidReceiveProps` which passes any changes that have been described in the object returned by `mapStateToProps`.
 
 ## `mapStateToProps` and `mapDispatchToProps`
 
