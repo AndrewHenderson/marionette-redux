@@ -3,8 +3,6 @@ Marionette Redux
 
 [Marionette](https://github.com/marionettejs/backbone.marionette) and [Backbone](https://github.com/jashkenas/backbone) bindings for [Redux](https://github.com/reactjs/redux).
 
-## How Does It Work?
-
 It's like [React Redux](https://github.com/reactjs/react-redux), but for Marionette and Backbone.
 
 Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
