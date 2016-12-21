@@ -49,7 +49,7 @@ __Note:__ In this example, `store` is a property on the component, but `connect`
 
 ## `componentDidReceiveProps`
 
-A component's `componentDidReceiveProps` will be executed when the state of the Redux store has changed that particular component has provided a `mapStateToProps` function to `connect`.
+A component's `componentDidReceiveProps` will be executed when the state of the Redux store has changed and that particular component has provided a `mapStateToProps` function to `connect`.
 
 ## `mapStateToProps` and `mapDispatchToProps`
 
