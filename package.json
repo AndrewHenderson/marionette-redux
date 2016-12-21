@@ -1,16 +1,15 @@
 {
   "name": "marionette-redux",
   "description": "Marionette bindings for Redux with support for Backbone",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "homepage": "https://github.com/AndrewHenderson/marionette-redux",
   "main": "dist/marionette-redux.js",
   "keywords": [
     "marionette",
     "redux",
-    "backbone",
     "connect",
     "middleware",
-    "plugin"
+    "backbone"
   ],
   "license": "MIT",
   "repository": {
