@@ -1,7 +1,7 @@
 Marionette Redux
 =========================
 
-[Marionette](https://github.com/marionettejs/backbone.marionette) bindings for [Redux](https://github.com/reactjs/redux) with support for [Backbone](https://github.com/jashkenas/backbone).
+[Marionette](https://github.com/marionettejs/backbone.marionette) and [Backbone](https://github.com/jashkenas/backbone) bindings for [Redux](https://github.com/reactjs/redux).
 
 ## How Does It Work?
 
