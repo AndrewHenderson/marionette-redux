@@ -15,6 +15,8 @@ Marionette Redux allows you to `connect` any Marionette or Backbone "component" 
 npm install --save marionette-redux
 ```
 
+## API
+
 ### `connect`
 
 Below is an example of a `Marionette.View` that has been subscribed to a Redux store. The following code just as easily be applied to `Marionette.Behavior`.
