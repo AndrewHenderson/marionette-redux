@@ -94,27 +94,6 @@ Or as the second argument provided to `connect`.
 var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({…}));
 ```
 
-### `Backbone.Model` and `Backbone.Collection`
-
-You also have the option to `connect` `Backbone.Model`s and `Backbone.Collection`s.
-
-```js
-var mapStateToProps = function(state) {
-  return {
-    currency: state.currency
-  }
-}
-var Model = Backbone.Model.extend({
-  store: store,
-  componentDidReceiveProps: function(update) {
-    this.set({
-      currency: update.currency
-    })
-  }
-});
-var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
-```
-
 ### `mixin`
 
 While `connect` is the recommended approach, if you'd rather employ a mixin, you can use the following:
@@ -144,6 +123,27 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 var connectedView = new ConnectedView();
 connectedView.setState({ foo: 'bar' }); // or connectedView.setState('foo', 'bar');
 connectedView.getState('foo'); // "bar"
+```
+
+## Backbone
+
+You also have the option to `connect` `Backbone.Model`s and `Backbone.Collection`s.
+
+```js
+var mapStateToProps = function(state) {
+  return {
+    currency: state.currency
+  }
+}
+var Model = Backbone.Model.extend({
+  store: store,
+  componentDidReceiveProps: function(update) {
+    this.set({
+      currency: update.currency
+    })
+  }
+});
+var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 ```
 
 ## License
