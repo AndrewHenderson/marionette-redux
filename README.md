@@ -5,7 +5,7 @@ Marionette Redux
 
 ## How Does It Work?
 
-It's like [React-Redux](https://github.com/reactjs/react-redux), but for Marionette and Backbone.
+It's like [React Redux](https://github.com/reactjs/react-redux), but for Marionette and Backbone.
 
 Marionette Redux allows you to `connect` any Marionette or Backbone "component" to a Redux store.
 
@@ -47,7 +47,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
   }
 }));
 ```
-__Note:__ In the previous example, `store` is placed on the View itself, but `connect` will also look to `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".
+__Note:__ In this example, `store` is a property on the component, but `connect` will also look to `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".
 
 ## `componentDidReceiveProps`
 
@@ -55,7 +55,7 @@ A component's `componentDidReceiveProps` will be executed when the state of the 
 
 ## `mapStateToProps` and `mapDispatchToProps`
 
-These work exactly as they do in [React-Redux](https://github.com/reactjs/react-redux).
+These work exactly as they do in [React Redux](https://github.com/reactjs/react-redux).
 
 `mapStateToProps` can be a property on the component itself (as seen in the previous example) or it can be passed to `connect` as the first argument:
 
