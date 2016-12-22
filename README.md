@@ -17,7 +17,7 @@ npm install --save marionette-redux
 
 ### `connect`
 
-Below is an example of a `Marionette.View` that has been subscribed to a Redux store. The following code just as easily be applied to `Marionette.Behavior`.
+Below is an example of a `Marionette.View` that has been subscribed to a Redux store. The following code could also be applied to a `Marionette.Behavior`.
 
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
@@ -49,7 +49,11 @@ __Note:__ In this example, `store` is a property on the component, but `connect`
 
 ## `componentDidReceiveProps`
 
-A component's `componentDidReceiveProps` will be executed when the state of the Redux store has changed and that particular component has provided a `mapStateToProps` function to `connect`.
+This function is our version of React's "componentWillReceiveProps."
+
+We chose to replace "will" with "did" since Marionette, unlike React, will not inherently render the component after this function is executed.
+
+Rather than serving as a link in the framework's lifecycle event chain, this function is simply executed when the state of the Redux store has changed (and the component has declared a `mapStateToProps` function).
 
 ## `mapStateToProps` and `mapDispatchToProps`
 
@@ -66,12 +70,12 @@ function mapStateToProps(state) {
 var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.extend({…}));
 ```
 
-`mapDispatchToProps` can also be on the component:
+`mapDispatchToProps` can also be on the component.
 
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
   events: {
-    'click': 'handleClick'
+    click: 'handleClick'
   },
   mapDispatchToProps: function(dispatch) {
     return {
@@ -88,7 +92,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 }));
 ```
 
-Or as the second argument provided to `connect`.
+Or passed as the second argument provided to `connect`.
 
 ```js
 var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({…}));
@@ -96,7 +100,7 @@ var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette
 
 ### `mixin`
 
-While `connect` is the recommended approach, if you'd rather employ a mixin, you can use the following:
+While `connect` is the recommended approach, it can also be used as a mixin.
 
 ```js
 Marionette.View.extend(MarionetteRedux.mixin);
@@ -130,7 +134,7 @@ connectedView.getState('foo'); // "bar"
 You also have the option to `connect` `Backbone.Model`s and `Backbone.Collection`s.
 
 ```js
-var mapStateToProps = function(state) {
+function mapStateToProps(state) {
   return {
     currency: state.currency
   }
