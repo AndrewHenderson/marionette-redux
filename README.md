@@ -131,7 +131,7 @@ connectedView.getState('foo'); // "bar"
 
 ## Backbone
 
-You also have the option to `connect` `Backbone.Model`s and `Backbone.Collection`s.
+You also have the option to `connect` a `Backbone.Model` or `Backbone.Collection`.
 
 ```js
 function mapStateToProps(state) {
