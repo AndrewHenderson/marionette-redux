@@ -1,5 +1,5 @@
 import { isObject, isFunction } from 'underscore'
-import { View, Behavior } from 'backbone.marionette'
+import { View, Behavior } from 'marionette'
 
 export default function isDisplayComponent(Component) {
   if (isFunction(Component)) {

@@ -12,7 +12,7 @@ import {
   bindEntityEvents,
   unbindEvents,
   unbindEntityEvents
-} from 'backbone.marionette';
+} from 'marionette';
 import defaultMapStateToProps from './mapStateToProps';
 import defaultMapDispatchToProps from './mapDispatchToProps';
 import defaultMergeProps from './mergeProps';

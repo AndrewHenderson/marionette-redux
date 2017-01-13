@@ -27,7 +27,7 @@ function _generate(bundle){
     banner: banner,
     globals: {
       'underscore': '_',
-      'backbone.marionette': 'Marionette'
+      'marionette': 'Marionette'
     }
   });
 }
@@ -35,7 +35,7 @@ function _generate(bundle){
 function bundle() {
   return rollup({
     entry: srcPath + name + '.js',
-    external: ['underscore', 'backbone.marionette'],
+    external: ['underscore', 'marionette'],
     plugins: [
       json(),
       nodeResolve({
