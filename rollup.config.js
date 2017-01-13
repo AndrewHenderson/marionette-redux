@@ -4,10 +4,11 @@ import babel from 'rollup-plugin-babel';
 export default {
   dest: 'dist/marionette-redux.js',
   entry: 'src/marionette-redux.js',
-  external: ['underscore', 'backbone'],
+  external: ['backbone', 'marionette', 'underscore'],
   format: 'umd',
   globals: {
     'backbone': 'Backbone',
+    'marionette': 'Marionette',
     'underscore': '_'
   },
   moduleName: 'JsonApi',

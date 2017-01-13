@@ -1,6 +1,6 @@
 // Marionette Redux
 // ----------------------------------
-// v0.1.10
+// v0.2.0
 //
 // Copyright (c)2017 Andrew Henderson.
 // Distributed under MIT license
@@ -347,7 +347,7 @@ function connect(_mapStateToProps, _mapDispatchToProps, _mergeProps, _options) {
   };
 }
 
-var version = "0.1.10";
+var version = "0.2.0";
 
 var MarionetteRedux = {
   connect: connect,
