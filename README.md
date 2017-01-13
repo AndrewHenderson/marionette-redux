@@ -9,6 +9,8 @@ Marionette Redux allows you to `connect` any Marionette or Backbone "component" 
 
 ## Installation
 
+__Notice: Some previous versions had a Marionette dependency issue. That has been fixed since v0.2.0.__
+
 ```
 npm install --save marionette-redux
 ```
