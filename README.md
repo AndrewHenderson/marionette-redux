@@ -42,7 +42,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
     }
   },
   
-  onDomRefresh: function() {
+  componentWillUpdate: function() {
     this.$el.toggleClass('active', this.props.isActive);
   }
 }));
@@ -52,32 +52,15 @@ __Note:__ In this example, `store` is a property on the component, but `connect`
 
 ## `componentWillReceiveProps`
 
-This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `onDomRefresh` in the case of a display component (`Marionette.View` or `Marionette.Behavior`).
+This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `componentWillUpdate` in the case of a display component (`Marionette.View` or `Marionette.Behavior`).
 
-If the component is not a display component, `componentWillReceiveProps` will still execute, however `onDomRefresh` will not be executed after.
+If the component is not a display component, `componentWillReceiveProps` will still execute, however `componentWillUpdate` will not be executed after.
 
-## `onDomRefresh`
+## `componentWillUpdate`
 
-This library ecourages the use of Marionette's `onDomRefresh` to ensure predictability of DOM state – one of the great things about React.
+This library ecourages the use of `componentWillUpdate` to ensure predictability of DOM state – one of the great things about React.
 
-As demonstrated above, `onDomRefresh` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's props or state.
-
-__If you DO NOT want `onDomRefresh` to fire, set the display component property `triggerDomRefresh` to `false`.__
-
-```js
-var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
-  
-  store: store,
-  
-  triggerDomRefresh: false,
-  
-  mapStateToProps: function(state) {
-    return {
-      isActive: state.isActive
-    }
-  }
-}));
-```
+As demonstrated above, `componentWillUpdate` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's `props` or `state`.
 
 ## `mapStateToProps`
 
@@ -169,9 +152,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 }));
 ```
 
-As with changes to `props`, changes to a display component's `state` will execute `onDomRefresh`.
-
-__If you DO NOT want `onDomRefresh` to fire, set the display component property `triggerDomRefresh` to `false`.__
+As with changes to `props`, changes to a display component's `state` will execute `componentWillUpdate`.
 
 ## Backbone
 
