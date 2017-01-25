@@ -122,6 +122,9 @@ const mixin = {
         options = this._pending;
         this._pending = false;
         this.trigger('change', this, options);
+        if (isDisplayComponent(this) && this.triggerDomRefresh !== false) {
+          this.triggerMethod('dom:refresh');
+        }
       }
     }
     this._pending = false;
