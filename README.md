@@ -54,7 +54,7 @@ __Note:__ In this example, `store` is a property on the component, but `connect`
 
 This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `onDomRefresh` in the case of a display component (`Marionette.View` or `Marionette.Behavior`).
 
-In the case of a component that is not a display component, `componentWillReceiveProps` will still execute, however `onDomRefresh` will not be executed after.
+If the component is not a display component, `componentWillReceiveProps` will still execute, however `onDomRefresh` will not be executed after.
 
 ## `onDomRefresh`
 
