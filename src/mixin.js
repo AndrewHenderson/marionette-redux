@@ -287,7 +287,11 @@ const mixin = {
       const mergedProps = this.mergeProps(this.stateProps, this.dispatchProps, this.props);
       this.props = mergedProps;
 
-      isFunction(this.componentDidReceiveProps) && this.componentDidReceiveProps(mergedProps)
+      isFunction(this.componentWillReceiveProps) && this.componentWillReceiveProps(mergedProps);
+
+      if (isDisplayComponent(this) && this.triggerDomRefresh !== false) {
+        this.triggerMethod('dom:refresh');
+      }
     }
 
     this.setState({

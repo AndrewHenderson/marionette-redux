@@ -16,7 +16,7 @@ export default function connect(_mapStateToProps, _mapDispatchToProps, _mergePro
     const mergeProps = _mergeProps || Component.prototype.mergeProps || defaultMergeProps;
     const store = options.store || Component.prototype.store;
     const componentInitialize = Component.prototype.initialize;
-    const componentonRender = Component.prototype.onRender;
+    const componentOnRender = Component.prototype.onRender;
     const componentOnDestroy = Component.prototype.onDestroy;
 
     let connectMixin = defaults({}, {
@@ -42,8 +42,8 @@ export default function connect(_mapStateToProps, _mapDispatchToProps, _mergePro
 
         mixin.onRender.apply(this, arguments);
 
-        if (componentonRender) {
-          componentonRender.apply(this, arguments)
+        if (componentOnRender) {
+          componentOnRender.apply(this, arguments)
         }
       },
 

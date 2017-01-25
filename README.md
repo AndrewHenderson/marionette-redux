@@ -9,7 +9,11 @@ Marionette Redux allows you to `connect` any Marionette or Backbone "component" 
 
 ## Installation
 
-__Notice: Some previous versions had a Marionette dependency issue. That has been fixed since v0.2.0.__
+### If you are using this in a UMD environment, this library expects Marionette to be defined as `marionette`, meaning `require('marionette')`.
+
+__If you are using another alias for Marionette, this library will likely throw an error, since Marionette will be `undefined`.__
+
+__If you were using >v2.0 you may have run into dependency issues.__
 
 ```
 npm install --save marionette-redux
@@ -23,39 +27,44 @@ Below is an example of a `Marionette.View` that has been subscribed to a Redux s
 
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
+  
   store: store,
-  getInitialState: function() {
-    return: {
-      isActive: false
-    }
-  },
-  stateEvents: {
-    'change:isActive': 'handleIsActiveChange'
-  },
+  
   mapStateToProps: function(state) {
     return {
       isActive: state.isActive
     }
   },
-  componentDidReceiveProps: function(update) {
-    this.setState({
-      isActive: update.isActive
-    });
-  },
-  handleIsActiveChange: function(view, isActive) {
-    this.$el.toggleClass('active', isActive);
+  onDomRefresh: function() {
+    this.$el.toggleClass('active', this.props.isActive);
   }
 }));
 ```
+
 __Note:__ In this example, `store` is a property on the component, but `connect` will also look to `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".
 
-## `componentDidReceiveProps`
+## `componentWillReceiveProps`
 
-This function is our version of React's "componentWillReceiveProps."
+This function is similar to React's "componentWillReceiveProps." It provides an opportunity to execute any side effect functions before execution of a display component's `onDomRefresh` method.
 
-We chose to replace "will" with "did" since Marionette, unlike React, will not inherently render the component after this function is executed.
+In the case of a component that is not a display component (i.e. View or Behavior), this function will still execute, however `onDomRefresh` will not be executed after.
 
-Rather than serving as a link in the framework's lifecycle event chain, this function is simply executed when the state of the Redux store has changed (and the component has declared a `mapStateToProps` function).
+__If you DO NOT want `onDomRefresh` to fire, set the display component property `triggerDomRefresh` to `false`.__
+
+```js
+var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
+  
+  store: store,
+  
+  triggerDomRefresh: false,
+  
+  mapStateToProps: function(state) {
+    return {
+      isActive: state.isActive
+    }
+  }
+}));
+```
 
 ## `mapStateToProps` and `mapDispatchToProps`
 
@@ -110,25 +119,37 @@ Marionette.View.extend(MarionetteRedux.mixin);
 
 ### `setState` and `getState`
 
-We've also added the `setState` and `getState` for convenient view layer state event changes. This works exactly the same as Marionette's `modelEvents` listeners, using the `stateEvents` object to define listeners:
+If you prefer more granular control over store updates, we've provided state to components: `setState`, `getState`, `state`, and `getInitialState`.
+
+This works exactly the same as Marionette's `modelEvents` listeners, using the `stateEvents` object to define listeners:
 
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
+
+  store: store,
+
   getInitialState: function() {
-    return {
-      foo: null
+    return: {
+      isActive: false
     }
-  }
-  stateEvents: {
-    'change:foo': 'handleFooChange'
   },
-  handelFooChange: function(view, foo) {
-    console.log("Foo changed to " + foo + "!");
-  }
+  stateEvents: {
+    'change:isActive': 'onIsActiveChange'
+  },
+  onIsActiveChange: function(view, isActive) {
+    this.$el.toggleClass('active', isActive);
+  },
+  mapStateToProps: function(state) {
+    return {
+      isActive: state.active === this.model.id
+    }
+  },
+  componentWillReceiveProps: function(update) {
+    this.setState({
+      isActive: update.isActive
+    });
+  },
 }));
-var connectedView = new ConnectedView();
-connectedView.setState({ foo: 'bar' }); // or connectedView.setState('foo', 'bar');
-connectedView.getState('foo'); // "bar"
 ```
 
 ## Backbone
@@ -142,8 +163,10 @@ function mapStateToProps(state) {
   }
 }
 var Model = Backbone.Model.extend({
+
   store: store,
-  componentDidReceiveProps: function(update) {
+  
+  componentWillReceiveProps: function(update) {
     this.set({
       currency: update.currency
     })
