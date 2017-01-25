@@ -49,6 +49,10 @@ const mixin = {
 
     if (!isDisplayComponent(this)) {
       this.trySubscribe()
+    } else {
+      if (this.componentWillUpdate) {
+        this.on('render', this.componentWillUpdate)
+      }
     }
   },
 
@@ -122,8 +126,11 @@ const mixin = {
         options = this._pending;
         this._pending = false;
         this.trigger('change', this, options);
-        if (isDisplayComponent(this) && this.triggerDomRefresh !== false) {
-          this.triggerMethod('dom:refresh');
+        if (isDisplayComponent(this) &&
+          (this._isRendered || (this.view && this.view._isRendered)) &&
+          this.componentWillUpdate
+        ) {
+          this.componentWillUpdate()
         }
       }
     }
@@ -292,8 +299,11 @@ const mixin = {
 
       isFunction(this.componentWillReceiveProps) && this.componentWillReceiveProps(mergedProps);
 
-      if (isDisplayComponent(this) && this._isRendered && this.triggerDomRefresh !== false) {
-        this.triggerMethod('dom:refresh');
+      if (isDisplayComponent(this) &&
+        (this._isRendered || (this.view && this.view._isRendered)) &&
+        this.componentWillUpdate
+      ) {
+        this.componentWillUpdate();
       }
     }
 
