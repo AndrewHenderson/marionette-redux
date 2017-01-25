@@ -132,11 +132,13 @@ While `connect` is the recommended approach, Marionette Redux can also be used a
 Marionette.View.extend(MarionetteRedux.mixin);
 ```
 
-### `setState` and `getState`
+### `state`
 
-If you prefer more granular control over store updates, we've provided state to components: `setState`, `getState`, `state`, and `getInitialState`.
+If you prefer more granular control over store updates, we've provided state to components as well.
 
-This works exactly the same as Marionette's `modelEvents` listeners, using the `stateEvents` object to define listeners:
+`setState`, `getState`, `state`, and `getInitialState` are all available for getting and setting state.
+
+State works exactly the same as Marionette's `modelEvents` listeners, using the `stateEvents` object to define listeners:
 
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
@@ -166,6 +168,10 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
   },
 }));
 ```
+
+Similar to `props` changes to a display component's `state` will execute `onDomRefresh`.
+
+__If you DO NOT want `onDomRefresh` to fire, set the display component property `triggerDomRefresh` to `false`.__
 
 ## Backbone
 
