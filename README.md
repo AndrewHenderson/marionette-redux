@@ -9,15 +9,21 @@ Marionette Redux allows you to `connect` any Marionette or Backbone "component" 
 
 ## Installation
 
-### If you are using this in a UMD environment, this library expects Marionette to be defined as `marionette`, meaning `require('marionette')`.
+```
+npm i -S marionette-redux
+```
 
-__If you are using another alias for Marionette, this library will likely throw an error, since Marionette will be `undefined`.__
-
-__If you were using >v2.0 you may have run into dependency issues.__
+__If you are using this in a UMD environment, this library expects Marionette to be defined as `marionette`.__
 
 ```
-npm install --save marionette-redux
+require('marionette');
+
+// or
+
+define(['marionette'], function(Marionette) { … });
 ```
+
+__If you are using another alias for Marionette, this library will likely throw an error, since Marionette will be `undefined`. You may have run into this issue if you were using >v2.0.__
 
 ## API
 
@@ -35,6 +41,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
       isActive: state.isActive
     }
   },
+  
   onDomRefresh: function() {
     this.$el.toggleClass('active', this.props.isActive);
   }
@@ -45,9 +52,17 @@ __Note:__ In this example, `store` is a property on the component, but `connect`
 
 ## `componentWillReceiveProps`
 
-This function is similar to React's "componentWillReceiveProps." It provides an opportunity to execute any side effect functions before execution of a display component's `onDomRefresh` method.
+This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `onDomRefresh` in the case of a display component (`Marionette.View` or `Marionette.Behavior`).
 
-In the case of a component that is not a display component (i.e. View or Behavior), this function will still execute, however `onDomRefresh` will not be executed after.
+In the case of a component that is not a display component, `componentWillReceiveProps` will still execute, however `onDomRefresh` will not be executed after.
+
+## `onDomRefresh`
+
+This library leverages the Marionette method for the sake of render consistency.
+
+One of the great things about React is the predictability of DOM state.
+
+This function can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to the component's props or state.
 
 __If you DO NOT want `onDomRefresh` to fire, set the display component property `triggerDomRefresh` to `false`.__
 
@@ -81,7 +96,7 @@ function mapStateToProps(state) {
 var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.extend({…}));
 ```
 
-`mapDispatchToProps` can also be on the component.
+`mapDispatchToProps` can also be a property on the component.
 
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
@@ -103,7 +118,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 }));
 ```
 
-Or passed as the second argument provided to `connect`.
+Or it can provided to `connect` as the second argument.
 
 ```js
 var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({…}));
@@ -111,7 +126,7 @@ var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette
 
 ### `mixin`
 
-While `connect` is the recommended approach, it can also be used as a mixin.
+While `connect` is the recommended approach, Marionette Redux can also be used as a mixin.
 
 ```js
 Marionette.View.extend(MarionetteRedux.mixin);
