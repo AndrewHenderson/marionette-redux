@@ -1,7 +1,7 @@
 {
   "name": "marionette-redux",
   "description": "Marionette and Backbone bindings for Redux",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/AndrewHenderson/marionette-redux",
   "main": "dist/marionette-redux.js",
   "keywords": [

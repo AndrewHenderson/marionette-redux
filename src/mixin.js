@@ -292,14 +292,14 @@ const mixin = {
 
       isFunction(this.componentWillReceiveProps) && this.componentWillReceiveProps(mergedProps);
 
-      if (isDisplayComponent(this) && this.triggerDomRefresh !== false) {
+      if (isDisplayComponent(this) && this._isRendered && this.triggerDomRefresh !== false) {
         this.triggerMethod('dom:refresh');
       }
     }
 
     this.setState({
       storeState
-    })
+    }, { silent: true })
   }
 };
 
