@@ -169,7 +169,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 }));
 ```
 
-Similar to `props` changes to a display component's `state` will execute `onDomRefresh`.
+As with changes to `props`, changes to a display component's `state` will execute `onDomRefresh`.
 
 __If you DO NOT want `onDomRefresh` to fire, set the display component property `triggerDomRefresh` to `false`.__
 
