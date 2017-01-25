@@ -58,11 +58,9 @@ If the component is not a display component, `componentWillReceiveProps` will st
 
 ## `onDomRefresh`
 
-This library leverages the Marionette method for the sake of render consistency.
+This library ecourages the use of Marionette's `onDomRefresh` to ensure predictability of DOM state – one of the great things about React.
 
-One of the great things about React is the predictability of DOM state.
-
-This function can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to the component's props or state.
+As demonstrated above, `onDomRefresh` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's props or state.
 
 __If you DO NOT want `onDomRefresh` to fire, set the display component property `triggerDomRefresh` to `false`.__
 
