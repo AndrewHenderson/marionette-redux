@@ -79,7 +79,7 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 }));
 ```
 
-## `mapStateToProps` and `mapDispatchToProps`
+## `mapStateToProps`
 
 These work exactly as they do in [React Redux](https://github.com/reactjs/react-redux).
 
@@ -93,6 +93,8 @@ function mapStateToProps(state) {
 }
 var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.extend({…}));
 ```
+
+## `mapDispatchToProps`
 
 `mapDispatchToProps` can also be a property on the component.
 
