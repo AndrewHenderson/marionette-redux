@@ -50,19 +50,9 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 
 __Note:__ In this example, `store` is a property on the component, but `connect` will also look to `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".
 
-## `componentWillReceiveProps`
+## Lifecycle
 
-This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `componentWillUpdate` in the case of a display component (`Marionette.View` or `Marionette.Behavior`).
-
-If the component is not a display component, `componentWillReceiveProps` will still execute, however `componentWillUpdate` will not be executed after.
-
-## `componentWillUpdate`
-
-This library ecourages the use of `componentWillUpdate` to ensure predictability of DOM state – one of the great things about React.
-
-As demonstrated above, `componentWillUpdate` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's `props` or `state`.
-
-## `mapStateToProps`
+### `mapStateToProps`
 
 Mappings work the same as in [React Redux](https://github.com/reactjs/react-redux).
 
@@ -107,13 +97,17 @@ Or it can provided to `connect` as the second argument.
 var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({…}));
 ```
 
-### `mixin`
+###`componentWillReceiveProps`
 
-While `connect` is the recommended approach, Marionette Redux can also be used as a mixin.
+This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `componentWillUpdate` in the case of a display component (`Marionette.View` or `Marionette.Behavior`).
 
-```js
-Marionette.View.extend(MarionetteRedux.mixin);
-```
+If the component is not a display component, `componentWillReceiveProps` will still execute, however `componentWillUpdate` will not be executed after.
+
+### `componentWillUpdate`
+
+This library ecourages the use of `componentWillUpdate` to ensure predictability of DOM state – one of the great things about React.
+
+As demonstrated above, `componentWillUpdate` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's `props` or `state`.
 
 ### `state`
 
@@ -153,6 +147,14 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 ```
 
 As with changes to `props`, changes to a display component's `state` will execute `componentWillUpdate`.
+
+## `mixin`
+
+While `connect` is the recommended approach, Marionette Redux can also be used as a mixin.
+
+```js
+Marionette.View.extend(MarionetteRedux.mixin);
+```
 
 ## Backbone
 
