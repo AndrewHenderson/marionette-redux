@@ -58,11 +58,13 @@ While `connect` is the recommended approach, Marionette Redux can also be used a
 Marionette.View.extend(MarionetteRedux.mixin);
 ```
 
-## Lifecycle
+## Mappings
+
+Mappings work the same as in [React Redux](https://github.com/reactjs/react-redux). A change to the Redux store will result in this callback being executed on any "connected" components.
 
 ### `mapStateToProps`
 
-Mappings work the same as in [React Redux](https://github.com/reactjs/react-redux). A change to the Redux store will result in this callback being executed on any "connected" components.
+`mapStateToProps` can be a property on the component itself or it can be passed to `connect` as the first argument.
 
 ```js
 function mapStateToProps(state) {
@@ -73,9 +75,7 @@ function mapStateToProps(state) {
 var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.extend({…}));
 ```
 
-`mapStateToProps` can be a property on the component itself or it can be passed to `connect` as the first argument.
-
-## `mapDispatchToProps`
+### `mapDispatchToProps`
 
 `mapDispatchToProps` can also be a property on the component.
 
@@ -104,6 +104,8 @@ Or it can provided to `connect` as the second argument.
 ```js
 var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette.View.extend({…}));
 ```
+
+## Lifecycle
 
 ###`componentWillReceiveProps`
 
