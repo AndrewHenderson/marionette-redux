@@ -64,7 +64,7 @@ As demonstrated above, `componentWillUpdate` can be used to execute code that yo
 
 ## `mapStateToProps`
 
-These work exactly as they do in [React Redux](https://github.com/reactjs/react-redux).
+Mappings work the same as in [React Redux](https://github.com/reactjs/react-redux).
 
 `mapStateToProps` can be a property on the component itself (as seen in the previous example) or it can be passed to `connect` as the first argument:
 
