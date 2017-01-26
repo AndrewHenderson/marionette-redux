@@ -64,8 +64,6 @@ Marionette.View.extend(MarionetteRedux.mixin);
 
 Mappings work the same as in [React Redux](https://github.com/reactjs/react-redux). A change to the Redux store will result in this callback being executed on any "connected" components.
 
-`mapStateToProps` can be a property on the component itself (as seen in the previous example) or it can be passed to `connect` as the first argument:
-
 ```js
 function mapStateToProps(state) {
   return {
@@ -74,6 +72,8 @@ function mapStateToProps(state) {
 }
 var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.extend({…}));
 ```
+
+`mapStateToProps` can be a property on the component itself or it can be passed to `connect` as the first argument.
 
 ## `mapDispatchToProps`
 
