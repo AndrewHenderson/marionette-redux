@@ -48,7 +48,15 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 }));
 ```
 
-__Note:__ In this example, `store` is a property on the component, but `connect` will also look to `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".
+__In this example, `store` is a property on the component, but `connect` will also look to `window.store` as a last resort. `window.store` can thus act similarly to React Redux's "[`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)".__
+
+### `mixin`
+
+While `connect` is the recommended approach, Marionette Redux can also be used as a mixin.
+
+```js
+Marionette.View.extend(MarionetteRedux.mixin);
+```
 
 ## Lifecycle
 
@@ -147,14 +155,6 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
 ```
 
 As with changes to `props`, changes to a display component's `state` will execute `componentWillUpdate`.
-
-## `mixin`
-
-While `connect` is the recommended approach, Marionette Redux can also be used as a mixin.
-
-```js
-Marionette.View.extend(MarionetteRedux.mixin);
-```
 
 ## Backbone
 
