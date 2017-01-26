@@ -64,7 +64,19 @@ Mappings work the same as in [React Redux](https://github.com/reactjs/react-redu
 
 ### `mapStateToProps`
 
-`mapStateToProps` can be a property on the component itself or it can be passed to `connect` as the first argument.
+`mapStateToProps` can be a property on the component itself.
+
+```js
+var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
+  mapStateToProps: function(state) {
+    return {
+      isActive: state.isActive
+    }
+  }
+}));
+```
+
+Or it can be provided to `connect` as the first argument.
 
 ```js
 function mapStateToProps(state) {
@@ -81,9 +93,6 @@ var ConnectedView = MarionetteRedux.connect(mapStateToProps)(Marionette.View.ext
 
 ```js
 var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
-  events: {
-    click: 'handleClick'
-  },
   mapDispatchToProps: function(dispatch) {
     return {
       dispatchMyEvent: function() {
@@ -92,6 +101,9 @@ var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
         });
       }
     }
+  },
+  events: {
+    click: 'handleClick'
   },
   handleClick: function() {
     this.props.dispatchMyEvent();
