@@ -16,7 +16,7 @@ npm i -S marionette-redux
 __If you are using this in a UMD environment, this library expects Marionette to be defined as `marionette`.__
 
 ```
-require('marionette');
+var Marionette = require('marionette');
 
 // or
 
