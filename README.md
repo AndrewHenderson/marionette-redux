@@ -117,7 +117,7 @@ This library ecourages the use of `componentWillUpdate` to ensure predictability
 
 As demonstrated above, `componentWillUpdate` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's `props` or `state`.
 
-### `state`
+## State
 
 If you prefer more granular control over store updates, we've provided state to components as well.
 
