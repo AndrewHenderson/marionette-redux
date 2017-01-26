@@ -62,7 +62,7 @@ Marionette.View.extend(MarionetteRedux.mixin);
 
 ### `mapStateToProps`
 
-Mappings work the same as in [React Redux](https://github.com/reactjs/react-redux).
+Mappings work the same as in [React Redux](https://github.com/reactjs/react-redux). A change to the Redux store will result in this callback being executed on any "connected" components.
 
 `mapStateToProps` can be a property on the component itself (as seen in the previous example) or it can be passed to `connect` as the first argument:
 
