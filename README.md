@@ -25,7 +25,7 @@ define(['marionette'], function(Marionette) { … });
 
 __If you are using another alias for Marionette, this library will likely throw an error, since Marionette will be `undefined`. You may have run into this issue if you were using >v2.0.__
 
-## API
+## Usage
 
 ### `connect`
 
