@@ -11,7 +11,7 @@ Marionette Redux allows you to `connect` any Marionette or Backbone "component" 
 
 __Predictability__.
 
-Marionette Redux introduces to Marionette application a lifecycle that allows for deterministic DOM updates – consistent at first render and for any store updates (or component state changes) after first render.
+Marionette Redux introduces to a Marionette application a lifecycle that allows for deterministic DOM updates – consistent at first render and for any store updates (or component state changes) after first render.
 
 `componentWillUpdate` will execute when a display component first renders. This is where you put your DOM manipuation code. A connected component's `mapStateToProps` will execute whenever the Redux store state changes; if the return object of display component's `mapStateToProps` differs from the last result, `componentWillUpdate` will execute.
 
