@@ -13,9 +13,9 @@ __Predictability__.
 
 Marionette Redux introduces to a Marionette application a lifecycle that allows for deterministic DOM updates – consistent at first render and for any store updates (or component state changes) after first render.
 
-`componentWillUpdate` will execute when a display component first renders. This is where you put your DOM manipuation code. A connected component's `mapStateToProps` will execute whenever the Redux store state changes; if the return object of display component's `mapStateToProps` differs from the last result, `componentWillUpdate` will execute.
+`componentWillUpdate` will execute when a display component first renders. This is where you put your DOM manipuation code. A connected component's `mapStateToProps` will execute whenever the Redux store state changes.
 
-Thus, you can set up components to always rely on the same set of values to determine their DOM state. This means that your view's can execute the same callstack on first render and for any Redux store changes.
+If the return object of display component's `mapStateToProps` differs from the last result, `componentWillUpdate` will execute. Thus, you can set up components to always rely on the same set of values to determine their DOM state. This means that your view's can execute the same callstack on first render and for any Redux store changes.
 
 ## Installation
 
