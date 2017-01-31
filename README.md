@@ -131,9 +131,9 @@ var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette
 
 ###`componentWillReceiveProps`
 
-This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `componentWillUpdate` in the case of a display component (`Marionette.View` or `Marionette.Behavior`).
+This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `componentWillUpdate`.
 
-If the component is not a display component, `componentWillReceiveProps` will still execute, however `componentWillUpdate` will not be executed after.
+Note: If the component is not a display component (`Marionette.View` or `Marionette.Behavior`), `componentWillReceiveProps` will still execute, however `componentWillUpdate` will not be executed after.
 
 ### `componentWillUpdate`
 
