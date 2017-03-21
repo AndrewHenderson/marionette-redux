@@ -194,6 +194,14 @@ var Model = Backbone.Model.extend({
 
   store: store,
   
+  initialize: function() {
+    this.on('update', function () {
+      store.dispatch({
+        type: 'MODEL_UPDATE',
+        data: this.toJSON()
+    });
+  },
+  
   componentWillReceiveProps: function(update) {
     this.set({
       currency: update.currency
