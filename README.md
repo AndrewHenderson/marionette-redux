@@ -129,7 +129,7 @@ var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette
 
 ## Lifecycle
 
-###`componentWillReceiveProps`
+### `componentWillReceiveProps`
 
 This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `componentWillUpdate`.
 
@@ -184,6 +184,8 @@ As with changes to `props`, changes to a display component's `state` will execut
 
 You also have the option to `connect` a `Backbone.Model` or `Backbone.Collection`.
 
+### Model
+
 ```js
 function mapStateToProps(state) {
   return {
@@ -195,6 +197,7 @@ var Model = Backbone.Model.extend({
   store: store,
   
   initialize: function() {
+    // update the store on changes
     this.on('update', function() {
       store.dispatch({
         type: 'MODEL_UPDATE',
@@ -210,6 +213,24 @@ var Model = Backbone.Model.extend({
   }
 });
 var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
+```
+### Collection
+```
+var Collection = Backbone.Collection.extend({
+
+  store: store,
+  
+  initialize: function() {
+    // update the store on changes
+    this.on('update', function() {
+      store.dispatch({
+        type: 'COLLECTION_UPDATE',
+        data: this.toJSON()
+      });
+    })
+  }
+});
+var ConnectedCollection = MarionetteRedux.connect()(Collection);
 ```
 
 ## License
