@@ -15,9 +15,11 @@ Marionette Redux introduces to a Marionette application a lifecycle that allows 
 
 ## How Does It Work?
 
-`componentWillUpdate` will execute when a display component (View or Behavior) first renders. This is where you put your DOM manipuation code. A connected component's `mapStateToProps` will execute whenever the Redux store state changes.
+`componentWillUpdate` will execute when a display component (View or Behavior) first renders. This is where you put your DOM manipuation code.
 
-If the return object of display component's `mapStateToProps` differs from the last result, `componentWillUpdate` will execute. Thus, you can set up components to always rely on the same set of values to determine their DOM state. This means that your view's can execute the same callstack on first render and for any Redux store changes.
+A connected component's `mapStateToProps` will execute whenever the Redux store state changes. If the return object of display component's `mapStateToProps` differs from the last result, `componentWillUpdate` will execute.
+
+Thus, you can set up components to always rely on the same set of values to determine their DOM state. This means that your view's can execute the same callstack on first render and for any Redux store changes.
 
 ## Installation
 
