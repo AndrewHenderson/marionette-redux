@@ -139,7 +139,24 @@ Note: If the component is not a display component (`Marionette.View` or `Marione
 
 This library ecourages the use of `componentWillUpdate` to ensure predictability of DOM state – one of the great things about React.
 
-As demonstrated above, `componentWillUpdate` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's `props` or `state`.
+As demonstrated below, `componentWillUpdate` can be used to execute code that you want to run when a component is first rendered and after any subsequent changes to a component's `props` or `state`.
+
+```js
+var ConnectedView = MarionetteRedux.connect()(Marionette.View.extend({
+  
+  store: store,
+  
+  mapStateToProps: function(state) {
+    return {
+      isActive: state.isActive
+    }
+  },
+  
+  componentWillUpdate: function() {
+    this.$el.toggleClass('active', this.props.isActive);
+  }
+}));
+```
 
 ## State
 
@@ -214,8 +231,10 @@ var Model = Backbone.Model.extend({
 });
 var ConnectedModel = MarionetteRedux.connect(mapStateToProps)(Model);
 ```
+
 ### Collection
-```
+
+```js
 var Collection = Backbone.Collection.extend({
 
   store: store,
