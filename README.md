@@ -15,7 +15,7 @@ Marionette Redux introduces to a Marionette application a lifecycle that allows 
 
 ## How Does It Work?
 
-`componentWillUpdate` will execute when a display component (View or Behavior) first renders. This is where you put your DOM manipuation code.
+`componentWillUpdate` will execute when a display component (`Marionette.View` or `Marionette.Behavior`) first renders. This is where you put your DOM manipuation code.
 
 A connected component's `mapStateToProps` will execute whenever the Redux store state changes. If the return object of display component's `mapStateToProps` differs from the last result, `componentWillUpdate` will execute.
 
@@ -137,7 +137,7 @@ var ConnectedView = MarionetteRedux.connect(null, mapDispatchToProps)(Marionette
 
 This function is similar to React's `componentWillReceiveProps`. It provides an opportunity to execute any side effect functions before execution of `componentWillUpdate`.
 
-Note: If the component is not a display component (`Marionette.View` or `Marionette.Behavior`), `componentWillReceiveProps` will still execute, however `componentWillUpdate` will not be executed after.
+__Note: If the component is not a display component (`Marionette.View` or `Marionette.Behavior`), `componentWillReceiveProps` will still execute, however `componentWillUpdate` WILL NOT.__
 
 ### `componentWillUpdate`
 
