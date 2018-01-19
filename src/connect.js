@@ -19,8 +19,13 @@ export default function connect(_mapStateToProps, _mapDispatchToProps, _mergePro
     const componentInitialize = Component.prototype.initialize;
     const componentOnRender = Component.prototype.onRender;
     const componentOnDestroy = Component.prototype.onDestroy;
+    const getInitialState = Component.prototype.getInitialState || function() {
+      return {}
+    };
 
     let connectMixin = _.defaults({}, {
+
+      getInitialState,
 
       initialize(_initOptions) {
 
