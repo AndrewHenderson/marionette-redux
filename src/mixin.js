@@ -30,10 +30,8 @@ const mixin = {
       this.store = window.store
     }
 
-    const storeState = this.store.getState();
-    this.state = _.defaults({
-      storeState: storeState
-    }, this.getInitialState());
+    this.storeState = this.store.getState();
+    this.state = this.getInitialState();
 
     this.bindStateEvents();
     this.clearCache();
@@ -136,13 +134,13 @@ const mixin = {
 
   bindStateEvents() {
     if (this.stateEvents) {
-      bindEvents(this, this, this.stateEvents)
+      bindEvents.call(this, this, this.stateEvents)
     }
   },
 
   unbindStateEvents() {
     if (this.stateEvents) {
-      unbindEvents(this, this, this.stateEvents)
+      unbindEvents.call(this, this, this.stateEvents)
     }
   },
 
@@ -273,7 +271,7 @@ const mixin = {
     }
 
     const storeState = this.store.getState();
-    const prevStoreState = this.getState('storeState');
+    const prevStoreState = this.storeState;
     if (this.haveInitialStatePropsBeenDetermined && _.isEqual(prevStoreState, storeState)) {
       return
     }
@@ -286,7 +284,7 @@ const mixin = {
       const mergedProps = this.mergeProps(this.stateProps, this.dispatchProps, this.props);
       this.props = mergedProps;
 
-      isFunction(this.componentWillReceiveProps) && this.componentWillReceiveProps(mergedProps);
+      _.isFunction(this.componentWillReceiveProps) && this.componentWillReceiveProps(mergedProps);
 
       if (isDisplayComponent(this) &&
         (this._isRendered || (this.view && this.view._isRendered)) &&
@@ -296,9 +294,7 @@ const mixin = {
       }
     }
 
-    this.setState({
-      storeState
-    }, { silent: true })
+    this.storeState = storeState;
   }
 };
 

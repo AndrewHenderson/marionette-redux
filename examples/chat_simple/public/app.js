@@ -50,7 +50,7 @@ var messagesMapStateToProps = function(state) {
 var MessagesView = MarionetteRedux.connect(messagesMapStateToProps)(Marionette.CollectionView.extend({
   childView: MessageView,
   className: "ui comments",
-  componentDidReceiveProps: function(update) {
+  componentWillReceiveProps: function(update) {
     this.collection.set(update.messages);
   }
 }));

@@ -65,7 +65,7 @@ var Model = Backbone.Model.extend({
   props: {
     currency: "EUR"
   },
-  componentDidReceiveProps: function(update) {
+  componentWillReceiveProps: function(update) {
     this.set({
       bar: update.bar,
       currency: update.currency
@@ -126,7 +126,7 @@ var BarView = Marionette.View.extend({
     'change:bar': 'onChangeBar',
     'change:inAmerica': 'render'
   },
-  componentDidReceiveProps: function(update) {
+  componentWillReceiveProps: function(update) {
     this.setState({
       bar: update.bar,
       inAmerica: update.inAmerica
@@ -146,7 +146,7 @@ var StatusView = Marionette.View.extend({
   template: function() {
     return '<span>' + this.props.label + ': ' + this.props.isActive + '</span>'
   },
-  componentDidReceiveProps: function() {
+  componentWillReceiveProps: function() {
     this.render()
   }
 });

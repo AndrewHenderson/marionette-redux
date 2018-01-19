@@ -76,12 +76,13 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "loose-envify": "^1.1.0",
-    "underscore": "^1.8.3"
+    "loose-envify": "^1.1.0"
   },
   "peerDependencies": {
+    "backbone.radio": "^2.0.0",
+    "backbone.marionette": "^3.5.1",
     "redux": "^2.0.0 || ^3.0.0",
-    "backbone.marionette": "^3.5.1"
+    "underscore": "^1.8.3"
   },
   "browserify": {
     "transform": [
