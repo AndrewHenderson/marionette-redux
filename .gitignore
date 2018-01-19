@@ -7,3 +7,8 @@ npm-debug.log
 
 # IDE
 .idea
+
+dist
+lib
+es
+.map
