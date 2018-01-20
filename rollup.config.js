@@ -9,10 +9,12 @@ const config = {
   entry: 'src/index.js',
   dest: 'dist/marionette-redux.js',
   external: [
-    'underscore'
+    'underscore',
+    'marionette'
   ],
   globals: {
-    'underscore': '_'
+    'underscore': '_',
+    'marionette': 'Marionette'
   },
   format: 'umd',
   moduleName: 'MarionetteRedux',
