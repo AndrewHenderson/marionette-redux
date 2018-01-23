@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV;
 
 const config = {
   entry: 'src/index.js',
-  dest: 'dist/marionette-redux.js',
+  dest: 'umd/marionette-redux.js',
   external: [
     'underscore',
     'marionette'

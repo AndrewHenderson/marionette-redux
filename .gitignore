@@ -8,7 +8,7 @@ npm-debug.log
 # IDE
 .idea
 
-dist
+umd
 lib
 es
 .map

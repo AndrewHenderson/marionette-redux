@@ -2,14 +2,14 @@
   "name": "marionette-redux",
   "version": "1.0.0",
   "description": "Marionette and Backbone bindings for Redux",
-  "main": "./dist/marionette-redux.js",
+  "main": "./umd/marionette-redux.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
   "scripts": {
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/marionette-redux.js",
-    "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/marionette-redux.min.js",
+    "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o umd/marionette-redux.js",
+    "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o umd/marionette-redux.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "clean": "rimraf lib dist es"
   },
@@ -18,7 +18,7 @@
     "url": "https://github.com/AndrewHenderson/marionette-redux.git"
   },
   "files": [
-    "dist",
+    "umd",
     "lib",
     "src",
     "es"
