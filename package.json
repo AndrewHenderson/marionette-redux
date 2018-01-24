@@ -1,6 +1,6 @@
 {
   "name": "marionette-redux",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Marionette and Backbone bindings for Redux",
   "main": "./umd/marionette-redux.js",
   "module": "es/index.js",
