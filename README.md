@@ -9,9 +9,13 @@ Marionette Redux allows you to `connect` any Marionette or Backbone "component" 
 
 ## Why Use This Library?
 
-__Predictability__.
+__Predictability__
 
 Marionette Redux introduces to a Marionette application a lifecycle that allows for deterministic DOM updates – consistent at first render and for any subsequent store updates (or component state changes) after the first render.
+
+__Migrating to React__
+
+If you've decided to migrate, Marionette Redux allows you to leverage as a central data store to share app state between your React and Marionette components.
 
 ## How Does It Work?
 
@@ -24,20 +28,8 @@ Thus, you can set up components to always rely on the same set of values to dete
 ## Installation
 
 ```
-npm i -S marionette-redux
+npm install --save marionette-redux
 ```
-
-__If you are using this in a UMD environment, this library expects Marionette to be defined as `marionette`.__
-
-```
-var Marionette = require('marionette');
-
-// or
-
-define(['marionette'], function(Marionette) { … });
-```
-
-__If you are using another alias for Marionette, this library will likely throw an error, since Marionette will be `undefined`. You may have run into this issue if you were using >v2.0.__
 
 ## Usage
 

@@ -1,8 +1,8 @@
 {
   "name": "marionette-redux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Marionette and Backbone bindings for Redux",
-  "main": "./lib/marionette-redux.js",
+  "main": "./umd/marionette-redux.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
   "scripts": {
