@@ -15,6 +15,9 @@ var TimersDashboard = MarionetteRedux.connect()(Marionette.View.extend({
   regions: {
     "toggleableTimerForm": "#toggleableTimerForm"
   },
+  stateEvents: {
+    'change:timers': 'updateTimers'
+  },
   onRender: function () {
     this.showChildView('toggleableTimerForm', new ToggleableTimerForm({
       props: {
@@ -73,7 +76,7 @@ var TimersDashboard = MarionetteRedux.connect()(Marionette.View.extend({
       timers: this.state.timers.filter(function(t) {
         return t.id !== timerId
       })
-  });
+    });
 
     client.deleteTimer(
       { id: timerId }
@@ -118,6 +121,9 @@ var TimersDashboard = MarionetteRedux.connect()(Marionette.View.extend({
     client.stopTimer(
       { id: timerId, stop: now }
     );
+  },
+  updateTimers: function(a, b) {
+    console.log(a, b)
   }
 }));
 

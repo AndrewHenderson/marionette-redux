@@ -1,12 +1,12 @@
-import { isObject, isFunction } from 'underscore'
-import { View, Behavior } from 'marionette'
+import _ from 'underscore';
+import Marionette from 'marionette'
 
 export default function isDisplayComponent(Component) {
-  if (isFunction(Component)) {
-    return Component.prototype instanceof View || Component.prototype instanceof Behavior
+  if (_.isFunction(Component)) {
+    return Component.prototype instanceof Marionette.View || Component.prototype instanceof Marionette.CollectionView || Component.prototype instanceof Marionette.Behavior
   }
-  if (isObject(Component)) {
-    return Component instanceof View || Component instanceof Behavior
+  if (_.isObject(Component)) {
+    return Component instanceof Marionette.View || Component instanceof Marionette.CollectionView || Component instanceof Marionette.Behavior
   }
   return false
 }

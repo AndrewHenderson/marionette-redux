@@ -1,11 +1,12 @@
 examples
-gulp
+dist
+lib
+es
 .babelrc
 .editorconfig
 .eslintrc
 .gitignore
 .gitattributes
-gulpfile.babel.js
 rollup.config.js
 docs
 .idea

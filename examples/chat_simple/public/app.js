@@ -14,8 +14,8 @@ Marionette.Renderer.render = function(template, data, view) {
 var MessageInput = MarionetteRedux.connect()(Marionette.View.extend({
   className: 'ui input',
   template: function () {
-    return "<input type='text'/>\
-      <button class='ui primary button' type='submit'>Submit</button>"
+    return "<input type='text'/>" +
+      "<button class='ui primary button' type='submit'>Submit</button>"
   },
   ui: {
     messageInput: 'input'
@@ -50,16 +50,16 @@ var messagesMapStateToProps = function(state) {
 var MessagesView = MarionetteRedux.connect(messagesMapStateToProps)(Marionette.CollectionView.extend({
   childView: MessageView,
   className: "ui comments",
-  componentDidReceiveProps: function(update) {
-    this.collection.set(update.messages);
+  componentWillUpdate: function() {
+    this.collection.set(this.props.messages);
   }
 }));
 
 var Root = MarionetteRedux.connect()(Marionette.View.extend({
   className: 'ui segment',
   template: function() {
-    return "<div id='MessagesView'></div>\
-      <div id='MessageInput'></div>"
+    return "<div id='MessagesView'></div>" +
+      "<div id='MessageInput'></div>"
   },
   regions: {
     MessagesView: '#MessagesView',

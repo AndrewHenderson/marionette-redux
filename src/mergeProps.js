@@ -1,4 +1,5 @@
-import { extend } from 'underscore';
+import _ from 'underscore';
+
 export default function mergeProps(stateProps, dispatchProps, parentProps) {
-  return extend({}, parentProps, stateProps, dispatchProps)
+  return _.extend({}, parentProps, stateProps, dispatchProps)
 }
