@@ -2,7 +2,7 @@
   "name": "marionette-redux",
   "version": "1.0.0",
   "description": "Marionette and Backbone bindings for Redux",
-  "main": "./umd/marionette-redux.js",
+  "main": "./lib/marionette-redux.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o umd/marionette-redux.js",
     "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o umd/marionette-redux.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "clean": "rimraf lib dist es"
+    "clean": "rimraf lib umd es"
   },
   "repository": {
     "type": "git",
@@ -79,7 +79,6 @@
     "loose-envify": "^1.1.0"
   },
   "peerDependencies": {
-    "backbone.radio": "^2.0.0",
     "backbone.marionette": "^3.5.1",
     "redux": "^2.0.0 || ^3.0.0",
     "underscore": "^1.8.3"
