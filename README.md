@@ -15,7 +15,11 @@ Marionette Redux introduces to a Marionette application a lifecycle that allows 
 
 __Migrating to React__
 
-If you've decided to migrate, Marionette Redux allows you to leverage as a central data store to share app state between your React and Marionette components.
+If you've decided to migrate, Marionette Redux allows you to leverage Redux as a central data store to share app state between your React and Marionette components.
+
+Examples:
+- [Counter](https://codepen.io/AndrewHenderson/pen/jYJeVP)
+- [Todos](https://codepen.io/AndrewHenderson/pen/BJbXaw?editors=0010)
 
 ## How Does It Work?
 
