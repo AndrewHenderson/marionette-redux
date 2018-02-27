@@ -13,13 +13,13 @@ __Migrating to React__
 
 If you've decided to migrate, Marionette Redux allows you to leverage Redux as a central data store to share app state between your React and Marionette components.
 
-__Predictability__
-
-Marionette Redux introduces to a Marionette application a lifecycle that allows for deterministic DOM updates – consistent at first render and for any subsequent store updates (or component state changes) after the first render.
-
 Examples:
 - [Counter](https://codepen.io/AndrewHenderson/pen/jYJeVP)
 - [Todos](https://codepen.io/AndrewHenderson/pen/BJbXaw?editors=0010)
+
+__Predictability__
+
+Marionette Redux introduces to a Marionette application a lifecycle that allows for deterministic DOM updates – consistent at first render and for any subsequent store updates (or component state changes) after the first render.
 
 ## How Does It Work?
 
