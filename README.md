@@ -27,7 +27,7 @@ Marionette Redux introduces to a Marionette application a lifecycle that allows 
 
 A connected component's `mapStateToProps` will execute whenever the Redux store state changes. If the return object of display component's `mapStateToProps` differs from the last result, `componentWillUpdate` will execute.
 
-Thus, you can set up components to always rely on the same set of values to determine their DOM state. This means that your view's can execute the same callstack on first render and for any Redux store changes.
+Thus, you can set up components to always rely on the same set of values to determine their DOM state. This means that your views can execute the same callstack on first render and for any subsequent changes to the Redux store.
 
 ## Installation
 
